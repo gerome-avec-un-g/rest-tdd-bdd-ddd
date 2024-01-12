@@ -2,11 +2,8 @@ package fr.geromeavecung.resttddbddddd.drivers.cucumber;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.geromeavecung.resttddbddddd.clients.rest.TodoJson;
 import fr.geromeavecung.resttddbddddd.clients.rest.UserJson;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.UserIdentifier;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.Todo;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoIdentifier;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.User;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.Users;
 import org.springframework.stereotype.Repository;
