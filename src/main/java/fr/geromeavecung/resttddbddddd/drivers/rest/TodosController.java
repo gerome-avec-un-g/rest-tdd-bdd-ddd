@@ -1,7 +1,7 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoIdentifier;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoPresentation;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoDetails;
 import fr.geromeavecung.resttddbddddd.domain.usecases.todos.RetrieveTodo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,9 @@ public class TodosController {
     }
 
     @GetMapping("/{todoIdentifier}")
-    public ResponseEntity<TodoPresentation> getTodo(@PathVariable int todoIdentifier) {
-        TodoPresentation todoPresentation = retrieveTodo.retrieveTodo(new TodoIdentifier(todoIdentifier));
-        return ResponseEntity.ok(todoPresentation);
+    public ResponseEntity<TodoDetails> getTodo(@PathVariable int todoIdentifier) {
+        TodoDetails todoDetails = retrieveTodo.retrieveTodo(new TodoIdentifier(todoIdentifier));
+        return ResponseEntity.ok(todoDetails);
     }
 
     // TODO request body

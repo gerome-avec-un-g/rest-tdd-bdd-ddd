@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 @Repository
 public class UsersRestTemplate implements Users {
 
+    // TODO web client
     private final RestTemplate restTemplate;
 
     @Autowired

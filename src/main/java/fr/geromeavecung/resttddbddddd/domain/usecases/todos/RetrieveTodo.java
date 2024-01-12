@@ -2,7 +2,7 @@ package fr.geromeavecung.resttddbddddd.domain.usecases.todos;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.Todo;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoIdentifier;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoPresentation;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoDetails;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodosService;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.User;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.UsersService;
@@ -23,10 +23,10 @@ public class RetrieveTodo {
         this.usersService = usersService;
     }
 
-    public TodoPresentation retrieveTodo(TodoIdentifier todoIdentifier) {
+    public TodoDetails retrieveTodo(TodoIdentifier todoIdentifier) {
         Todo todo = todosService.retrieveTodo(todoIdentifier);
         User user = usersService.retrieveTodo(todo.userIdentifier());
-        return new TodoPresentation(Integer.toString(todo.userIdentifier().value()),
+        return new TodoDetails(Integer.toString(todo.userIdentifier().value()),
                 Integer.toString(todo.todoIdentifier().value()),
                 todo.title().value(), todo.status().toString(),
                 user.name().value(), user.address().city().value());

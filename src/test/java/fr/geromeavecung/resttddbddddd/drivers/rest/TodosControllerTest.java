@@ -1,7 +1,7 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoIdentifier;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoPresentation;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoDetails;
 import fr.geromeavecung.resttddbddddd.domain.usecases.todos.RetrieveTodo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ class TodosControllerTest {
 
     @Test
     void getTodo() throws Exception {
-        var todo = new TodoPresentation("1", "1",
+        var todo = new TodoDetails("1", "1",
                 "delectus aut autem", "PENDING", "Leanne Graham", "Gwenborough");
         when(retrieveTodo.retrieveTodo(new TodoIdentifier(1))).thenReturn(todo);
 
