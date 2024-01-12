@@ -28,13 +28,14 @@ class TodosControllerTest {
     @Test
     void getTodo() throws Exception {
         var todo = new TodoPresentation("1", "1",
-                "delectus aut autem", "PENDING");
+                "delectus aut autem", "PENDING", "Leanne Graham", "Gwenborough");
         when(retrieveTodo.retrieveTodo(new TodoIdentifier(1))).thenReturn(todo);
 
         mockMvc.perform(get("/todos/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("{\"userIdentifier\":\"1\",\"todoIdentifier\":\"1\",\"title\":\"delectus aut autem\",\"status\":\"PENDING\"}")));
+                .andExpect(content().string(containsString("""
+                        {"userIdentifier":"1","todoIdentifier":"1","title":"delectus aut autem","status":"PENDING","userName":"Leanne Graham","userCity":"Gwenborough"}""")));
     }
 
 }
