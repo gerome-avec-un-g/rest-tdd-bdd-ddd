@@ -5,24 +5,21 @@ import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.User;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.Objects;
+import org.springframework.web.client.RestTemplate;
 
 @Repository
-public class UsersWebClient implements Users {
+public class UsersFromRest implements Users {
 
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public UsersWebClient(WebClient webClient) {
-        this.webClient = webClient;
+    public UsersFromRest(RestTemplate jsonPlaceholderRestTemplate) {
+        this.restTemplate = jsonPlaceholderRestTemplate;
     }
 
     @Override
     public User retrieveUser(UserIdentifier userIdentifier) {
-        UserJson userJson = Objects.requireNonNull(webClient.get().uri("/users/" + userIdentifier.value())
-                .retrieve().toEntity(UserJson.class).block()).getBody();
+        UserJson userJson = restTemplate.getForObject("/users/" + userIdentifier.value(), UserJson.class);
         if (userJson == null) {
             return null;
         }

@@ -5,7 +5,6 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class JsonPlaceholderRestTemplateConfiguration {
@@ -16,8 +15,4 @@ public class JsonPlaceholderRestTemplateConfiguration {
         return restTemplateBuilder.rootUri(rootUri).build();
     }
 
-    @Bean
-    public WebClient jsonPlaceholderWebClient(@Value("${jsonPlaceholder.rootUri}") String rootUri) {
-        return WebClient.builder().baseUrl(rootUri).build();
-    }
 }

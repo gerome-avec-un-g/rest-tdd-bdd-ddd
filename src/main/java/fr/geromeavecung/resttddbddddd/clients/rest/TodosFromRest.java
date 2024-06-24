@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 @Repository
-public class TodosRestTemplate implements Todos {
+public class TodosFromRest implements Todos {
 
     private final RestTemplate restTemplate;
 
     @Autowired
-    public TodosRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public TodosFromRest(RestTemplate jsonPlaceholderRestTemplate) {
+        this.restTemplate = jsonPlaceholderRestTemplate;
     }
 
     @Override
