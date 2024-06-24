@@ -6,8 +6,6 @@ import fr.geromeavecung.resttddbddddd.clients.rest.TodoJson;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.Todo;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.TodoIdentifier;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.todos.Todos;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,16 +13,9 @@ import java.util.List;
 @Repository
 public class TodosInMemory implements Todos {
 
-    @Value("classpath:json/todos.json")
-    private Resource todos;
-
-    @Value("on")
-    private String test;
-
     private final List<TodoJson> values;
 
     public TodosInMemory() throws JsonProcessingException {
-        System.out.println("ckeck "+test);
         this.values= new ObjectMapper().readValue("""
                 [{
                   "userId": 1,

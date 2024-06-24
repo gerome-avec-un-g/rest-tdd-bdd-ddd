@@ -25,8 +25,7 @@ public class AUserRetrievesATodoDetailsStepDefs {
 
     @Given("the user {string}")
     public void the_user(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();
+        // TODO Write code here that turns the phrase above into concrete actions
     }
     @When("the user retrieves a todo details for todo {int}")
     public void the_user_retrieves_a_todo_details_for_todo(int todoIdentifier) {
