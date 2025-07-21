@@ -55,6 +55,8 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
+			<!-- override spring-boot version to fix issues -->
+			<version>5.13.3</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
