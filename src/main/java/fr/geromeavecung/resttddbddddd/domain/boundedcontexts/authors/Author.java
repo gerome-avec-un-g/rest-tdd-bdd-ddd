@@ -8,10 +8,6 @@ public record Author (UUID identifier, String firstName, String lastName) {
 
     private static final int MAXIMUM_NAME_SIZE = 20;
 
-    public Author(String firstName, String lastName) {
-        this(UUID.randomUUID(), firstName, lastName);
-    }
-
     public Author {
         if (firstName == null || firstName.trim().isEmpty()) {
             throw new ValidationException("first name '%s' is mandatory".formatted(firstName));
