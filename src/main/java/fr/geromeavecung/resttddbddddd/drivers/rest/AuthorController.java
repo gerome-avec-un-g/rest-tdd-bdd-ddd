@@ -1,8 +1,8 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
-import fr.geromeavecung.resttddbddddd.domain.usecases.todos.ReadAuthors;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.ReadAuthors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +25,12 @@ public class AuthorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Author>> getAuthors() {
+    public ResponseEntity<List<Author>> findAllAuthors() {
         return ResponseEntity.ok(readAuthors.readAll());
     }
 
     @PostMapping
-    public ResponseEntity<AuthorCreationResponse> getTodo(@RequestBody AuthorCreationRequest authorCreationRequest) {
+    public ResponseEntity<AuthorCreationResponse> createAuthor(@RequestBody AuthorCreationRequest authorCreationRequest) {
         Author author = createAnAuthor.execute(authorCreationRequest.convert());
         return ResponseEntity.ok(new AuthorCreationResponse(author));
     }

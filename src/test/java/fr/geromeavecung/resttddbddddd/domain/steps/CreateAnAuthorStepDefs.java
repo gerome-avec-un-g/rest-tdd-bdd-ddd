@@ -1,10 +1,9 @@
-package fr.geromeavecung.resttddbddddd.drivers.cucumber.steps;
+package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Authors;
-import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
-import fr.geromeavecung.resttddbddddd.drivers.cucumber.fakes.AuthorsInMemory;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -74,7 +73,6 @@ public class CreateAnAuthorStepDefs {
 
     @Then("the author {word} {word} is created with its unique identifier {string}")
     public void the_author_firstName_lastname_is_created_with_its_unique_identifier(String firstName, String lastName, String uniqueIdentifier) {
-        //verify(authors).save(author);
         // TODO mock/H2
         assertThat(authors.findAll()).contains(author);
         assertThat(author).isEqualTo(new Author(UUID.fromString(uniqueIdentifier), firstName, lastName));

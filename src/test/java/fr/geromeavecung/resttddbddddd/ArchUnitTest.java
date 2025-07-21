@@ -53,7 +53,7 @@ class ArchUnitTest {
         rule.check(CLASSES);
     }
 
-    // does not work, ArchUnit only checks bytecode...
+    // TODO does not work, ArchUnit only checks bytecode...
 //    @Test
 //    void lombok_cant_be_used() {
 //        ArchRule rule = noClasses().should().dependOnClassesThat()

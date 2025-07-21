@@ -71,11 +71,10 @@ public class JsonParser {
         if (value == null) {
             return "";
         }
-        if (value instanceof String valueAsString) {
-            if (valueAsString.isBlank()) {
+        if (value instanceof String valueAsString && valueAsString.isBlank()) {
                 return "[blank]";
             }
-        }
+
         return value.toString();
     }
 
