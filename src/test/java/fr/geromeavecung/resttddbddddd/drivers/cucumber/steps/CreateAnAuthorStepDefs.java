@@ -1,7 +1,9 @@
 package fr.geromeavecung.resttddbddddd.drivers.cucumber.steps;
 
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
 import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -11,15 +13,39 @@ public class CreateAnAuthorStepDefs {
 
     private final CreateAnAuthor createAnAuthor;
     private Exception exception;
+    private Author author;
 
     public CreateAnAuthorStepDefs(CreateAnAuthor createAnAuthor) {
         this.createAnAuthor = createAnAuthor;
     }
 
-    @When("I create an author named <first name> Doe")
+    @DataTableType(replaceWithEmptyString = "[empty]")
+    public String stringType(String cell) {
+        if (cell == null || "[null]".equals(cell)) {
+            return null;
+        }
+        if ("[empty]".equals(cell)) {
+            return "";
+        }
+        if ("[blank]".equals(cell)) {
+            return " ";
+        }
+        return cell;
+    }
+
+    @When("I create an author named {word} Doe")
     public void i_create_an_author_named_firstname_doe(String firstName) {
         try {
-            createAnAuthor.execute(new AuthorCreationCommand(firstName, "Doe"));
+            author = createAnAuthor.execute(new AuthorCreationCommand(stringType(firstName), "Doe"));
+        } catch (Exception e) {
+            exception = e;
+        }
+    }
+
+    @When("I create an author named John {word}")
+    public void i_create_an_author_named_john_lastname(String lastName) {
+        try {
+            author = createAnAuthor.execute(new AuthorCreationCommand("John", stringType(lastName)));
         } catch (Exception e) {
             exception = e;
         }

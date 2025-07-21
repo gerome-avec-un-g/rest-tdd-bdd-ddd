@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ContextConfiguration(classes = {AuthorController.class, GlobalExceptionHandler.class})
+@ContextConfiguration(classes = {AuthorController.class})
 @WebMvcTest
 class AuthorControllerTest {
 
@@ -30,7 +30,7 @@ class AuthorControllerTest {
     private CreateAnAuthor createAnAuthor;
 
     @Test
-    void createAnAuthor() throws Exception {
+    void create_an_author() throws Exception {
         Author author = new Author(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), "Isaac", "Asimov");
         when(createAnAuthor.execute(new AuthorCreationCommand("Isaac", "Asimov"))).thenReturn(author);
 

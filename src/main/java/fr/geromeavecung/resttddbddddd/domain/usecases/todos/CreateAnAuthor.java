@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 public class CreateAnAuthor {
 
     public Author execute(AuthorCreationCommand authorCreationCommand) {
-        return null;
+        Author author = authorCreationCommand.convert();
+        return author;
     }
 
 }
