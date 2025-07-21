@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd.domain.fakes;
+package fr.geromeavecung.resttddbddddd.drivers.cucumber.fakes;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.IdentifierGenerator;
 import org.springframework.stereotype.Repository;

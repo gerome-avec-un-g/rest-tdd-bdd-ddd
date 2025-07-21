@@ -2,8 +2,7 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
-import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
-import fr.geromeavecung.resttddbddddd.domain.usecases.ReadAuthors;
+import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -32,9 +31,6 @@ class AuthorControllerTest {
 
     @MockitoBean
     private CreateAnAuthor createAnAuthor;
-
-    @MockitoBean
-    private ReadAuthors readAuthors;
 
     @Test
     void create_an_author() throws Exception {

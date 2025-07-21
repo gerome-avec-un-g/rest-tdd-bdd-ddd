@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd.domain.usecases;
+package fr.geromeavecung.resttddbddddd.domain.usecases.todos;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Authors;
