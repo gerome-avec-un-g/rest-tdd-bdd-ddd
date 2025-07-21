@@ -3,6 +3,8 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
 import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ContextConfiguration(classes = {AuthorController.class})
 @WebMvcTest
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class AuthorControllerTest {
 
     @Autowired

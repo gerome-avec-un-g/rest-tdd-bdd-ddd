@@ -8,6 +8,8 @@ import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.Name;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.Street;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.User;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.users.ZipCode;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
@@ -21,6 +23,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @RestClientTest(UsersFromRest.class)
 @AutoConfigureWebClient(registerRestTemplate = true)
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class UsersFromRestTest {
 
     @Autowired
