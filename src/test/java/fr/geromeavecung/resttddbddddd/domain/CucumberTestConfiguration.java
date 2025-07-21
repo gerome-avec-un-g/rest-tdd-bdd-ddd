@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd.drivers.cucumber;
+package fr.geromeavecung.resttddbddddd.domain;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

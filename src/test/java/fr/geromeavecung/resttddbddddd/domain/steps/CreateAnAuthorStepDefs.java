@@ -1,10 +1,9 @@
-package fr.geromeavecung.resttddbddddd.drivers.cucumber.steps;
+package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Authors;
-import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
-import fr.geromeavecung.resttddbddddd.drivers.cucumber.fakes.AuthorsInMemory;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

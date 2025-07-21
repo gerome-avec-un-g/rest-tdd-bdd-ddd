@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 @Repository
 public class UsersFromRest implements Users {
 
+    //https://dummyjson.com/docs/users#users-all
+
     private final RestTemplate restTemplate;
 
     @Autowired

@@ -1,10 +1,9 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.BusinessException;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
-import fr.geromeavecung.resttddbddddd.domain.usecases.todos.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.ReadAuthors;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,9 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,6 +28,9 @@ class GlobalExceptionHandlerTest {
 
     @MockitoBean
     private CreateAnAuthor createAnAuthor;
+
+    @MockitoBean
+    private ReadAuthors readAuthors;
 
     @Test
     void validation_exceptions_return_status_bad_request() throws Exception {

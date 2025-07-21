@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd.drivers.cucumber.fakes;
+package fr.geromeavecung.resttddbddddd.domain.fakes;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Authors;

@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd.domain.usecases.todos;
+package fr.geromeavecung.resttddbddddd.domain.usecases;
 
 import org.springframework.stereotype.Service;
 
