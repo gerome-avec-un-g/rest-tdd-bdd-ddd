@@ -6,3 +6,24 @@ Content-Type: application/json
   "firstName": "Isaac",
   "lastName": "Asimov"
 }
+
+###
+POST http://localhost:8080/authors
+Content-Type: application/json
+
+{
+"firstName": "John",
+"lastName": "Doe"
+}
+
+###
+POST http://localhost:8080/authors
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe"
+}
+
+###
+GET http://localhost:8080/authors?searchTerm=Doe
