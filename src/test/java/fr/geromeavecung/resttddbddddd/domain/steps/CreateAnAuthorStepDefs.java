@@ -5,6 +5,7 @@ import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreat
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
 import io.cucumber.java.DataTableType;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -37,6 +38,11 @@ public class CreateAnAuthorStepDefs {
             return " ";
         }
         return cell;
+    }
+
+    @Given("The author {word} {word} exists in the system")
+    public void the_author_firstName_lastname_exists_in_the_system(String firstName, String lastName) {
+        authors.save(new Author(UUID.randomUUID(), firstName, lastName));
     }
 
     @When("I create an author with first name {word}")
@@ -73,9 +79,9 @@ public class CreateAnAuthorStepDefs {
 
     @Then("the author {word} {word} is created with its unique identifier {string}")
     public void the_author_firstName_lastname_is_created_with_its_unique_identifier(String firstName, String lastName, String uniqueIdentifier) {
-        //verify(authors).save(author);
         // TODO mock/H2
         assertThat(authors.findAll()).contains(author);
         assertThat(author).isEqualTo(new Author(UUID.fromString(uniqueIdentifier), firstName, lastName));
     }
+
 }

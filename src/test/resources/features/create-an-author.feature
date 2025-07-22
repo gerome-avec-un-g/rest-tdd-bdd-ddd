@@ -23,6 +23,10 @@ Feature: Create an author
         #| $    | special characters    |
 
   Rule: an author must not already exists
-    Example:
+    Example: the author doesn't exists
       When I create an author named John Doe
       Then the author John Doe is created with its unique identifier "1160aed8-eb2f-4fb3-92e4-43480fff64f5"
+    Example: the author already exists
+      Given The author John Doe exists in the system
+      When I create an author named John Doe
+      Then an error is raised with message "The author 'John Doe' already exists"
