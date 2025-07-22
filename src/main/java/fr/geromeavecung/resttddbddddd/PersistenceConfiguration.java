@@ -7,5 +7,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EntityScan("fr.geromeavecung.resttddbddddd.*")
 @EnableJpaRepositories(considerNestedRepositories = true)
-public class ApplicationConfiguration {
+public class PersistenceConfiguration {
+
+    // need to be in a separate file from spring-boot application, otherwise seems to clash with @RestClientTest
+
 }

@@ -1,6 +1,6 @@
 package fr.geromeavecung.resttddbddddd.clients.persistence;
 
-import fr.geromeavecung.resttddbddddd.ApplicationConfiguration;
+import fr.geromeavecung.resttddbddddd.PersistenceConfiguration;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @Import({AuthorsFromDatabase.class})
-@ContextConfiguration(classes = {ApplicationConfiguration.class})
+@ContextConfiguration(classes = {PersistenceConfiguration.class})
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class AuthorsFromDatabaseTest {
 
