@@ -2,12 +2,13 @@ package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
-import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
-import io.cucumber.java.DataTableType;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -15,29 +16,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateAnAuthorStepDefs {
 
-    private final CreateAnAuthor createAnAuthor;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAnAuthorStepDefs.class);
 
+    private final CreateAnAuthor createAnAuthor;
     private final AuthorsInMemory authors;
-    private Exception exception;
+    private final SharedState sharedState;
+
     private Author author;
 
-    public CreateAnAuthorStepDefs(CreateAnAuthor createAnAuthor, AuthorsInMemory authors) {
+    public CreateAnAuthorStepDefs(CreateAnAuthor createAnAuthor, AuthorsInMemory authors, SharedState sharedState) {
         this.createAnAuthor = createAnAuthor;
         this.authors = authors;
-    }
-
-    @DataTableType(replaceWithEmptyString = "[empty]")
-    public String stringType(String cell) {
-        if (cell == null || "[null]".equals(cell)) {
-            return null;
-        }
-        if ("[empty]".equals(cell)) {
-            return "";
-        }
-        if ("[blank]".equals(cell)) {
-            return " ";
-        }
-        return cell;
+        this.sharedState = sharedState;
     }
 
     @Given("The author {word} {word} exists in the system")
@@ -47,34 +37,26 @@ public class CreateAnAuthorStepDefs {
 
     @When("I create an author with first name {word}")
     public void i_create_an_author_named_firstname_doe(String firstName) {
-        try {
-            author = createAnAuthor.execute(new AuthorCreationCommand(stringType(firstName), "Doe"));
-        } catch (Exception e) {
-            exception = e;
-        }
+        createAnAuthor(firstName, "Doe");
     }
 
     @When("I create an author with last name {word}")
     public void i_create_an_author_named_john_lastname(String lastName) {
-        try {
-            author = createAnAuthor.execute(new AuthorCreationCommand("John", stringType(lastName)));
-        } catch (Exception e) {
-            exception = e;
-        }
+        createAnAuthor("John", lastName);
     }
 
     @When("I create an author named {word} {word}")
     public void i_create_an_author_named_firstName_lastname(String firstName, String lastName) {
-        try {
-            author = createAnAuthor.execute(new AuthorCreationCommand(firstName, stringType(lastName)));
-        } catch (Exception e) {
-            exception = e;
-        }
+        createAnAuthor(firstName, lastName);
     }
 
-    @Then("an error is raised with message {string}")
-    public void an_error_is_raised_with_message(String message) {
-        assertThat(exception).hasMessage(message);
+    private void createAnAuthor(String firstName, String lastName) {
+        try {
+            author = createAnAuthor.execute(new AuthorCreationCommand(SharedStepDefs.sanitize(firstName), SharedStepDefs.sanitize(lastName)));
+        } catch (Exception exception) {
+            LOGGER.error(exception.getMessage());
+            sharedState.setException(exception);
+        }
     }
 
     @Then("the author {word} {word} is created with its unique identifier {string}")

@@ -22,4 +22,9 @@ public record Author (UUID identifier, String firstName, String lastName) {
             throw new ValidationException("last name '%s' is more than 20 characters".formatted(lastName));
         }
     }
+
+    public boolean isLike(String searchTerm) {
+        String fullName = firstName.toLowerCase() + " " + lastName.toLowerCase();
+        return fullName.contains(searchTerm.toLowerCase());
+    }
 }
