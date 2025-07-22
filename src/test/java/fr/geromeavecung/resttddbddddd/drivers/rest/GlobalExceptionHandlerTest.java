@@ -80,6 +80,6 @@ class GlobalExceptionHandlerTest {
 
     }
 
-    // TODO with another endopoint for instance field with url
+    // TODO with another endpoint for instance field with url
 
 }
