@@ -1,7 +1,11 @@
 package fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books;
 
+import java.util.List;
+import java.util.UUID;
+
 public interface Books {
 
     void save(Book book);
+    List<Book> findAllByAuthor(UUID uuid);
 
 }

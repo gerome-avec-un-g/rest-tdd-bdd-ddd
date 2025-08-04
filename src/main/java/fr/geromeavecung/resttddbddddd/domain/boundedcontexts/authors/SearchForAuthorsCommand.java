@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd.domain.usecases;
+package fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
 

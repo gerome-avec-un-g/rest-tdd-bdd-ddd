@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class BooksInMemory implements Books {
@@ -15,6 +16,13 @@ public class BooksInMemory implements Books {
     @Override
     public void save(Book book) {
         books.add(book);
+    }
+
+    @Override
+    public List<Book> findAllByAuthor(UUID authorIdentifier) {
+        return books.stream()
+                .filter(book -> book.authorIdentifier().equals(authorIdentifier))
+                .toList();
     }
 
     public List<Book> findAll() {

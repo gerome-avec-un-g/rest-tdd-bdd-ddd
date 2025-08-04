@@ -1,6 +1,5 @@
 package fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors;
 
-import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthorsCommand;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

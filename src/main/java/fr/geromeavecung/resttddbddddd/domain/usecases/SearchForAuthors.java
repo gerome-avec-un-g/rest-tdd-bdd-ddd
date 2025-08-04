@@ -2,6 +2,7 @@ package fr.geromeavecung.resttddbddddd.domain.usecases;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorSearchByName;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

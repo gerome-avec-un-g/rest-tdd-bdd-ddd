@@ -1,6 +1,9 @@
 package fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books;
 
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.BusinessException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BookCreation {
@@ -12,6 +15,10 @@ public class BookCreation {
     }
 
     public Book save(Book book) {
+        List<Book> booksBySameAuthor = books.findAllByAuthor(book.authorIdentifier());
+        if (booksBySameAuthor.stream().anyMatch(existingBook -> existingBook.title().equals(book.title()))) {
+            throw new BusinessException("Book '%s' already exists for '%s'".formatted(book.title(), book.authorIdentifier()));
+        }
         books.save(book);
         return book;
     }

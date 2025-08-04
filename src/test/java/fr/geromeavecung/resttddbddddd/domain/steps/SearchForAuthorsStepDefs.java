@@ -1,7 +1,7 @@
 package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthorsCommand;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import io.cucumber.java.DataTableType;

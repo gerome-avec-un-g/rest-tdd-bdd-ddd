@@ -36,11 +36,16 @@ Feature: Create a book
       When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then the book "Foundation" is created with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
 
-#  Rule: a book must not already exists for an author
-#    Example: the author doesn't exists
-#      When I create an author named John Doe
-#      Then the author John Doe is created with its unique identifier "1160aed8-eb2f-4fb3-92e4-43480fff64f5"
-#    Example: the author already exists
-#      Given The author John Doe exists in the system
-#      When I create an author named John Doe
-#      Then an error is raised with message "The author 'John Doe' already exists"
+  Rule: a book must not already exists for an author
+    Example: the book doesn't exists for the author
+      When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      Then the book "Foundation" is created with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+    Example: the book already exists for the author
+      Given the book "Foundation" with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      Then an error is raised with message "Book 'Foundation' already exists for '8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac'"
+      # should we go read author's name for an error message?
+    Example: the book already exists for another author
+      Given the book "Foundation" with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 589a0b4c-93b8-4f46-8c7e-02794a8c252e
+      When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      Then the book "Foundation" is created with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac

@@ -4,6 +4,7 @@ import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.fakes.BooksInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABookCommand;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.slf4j.Logger;
@@ -29,6 +30,11 @@ public class CreateABookStepDefs {
         this.sharedState = sharedState;
     }
 
+    @Given("the book {string} with its unique identifier {word} for author {word}")
+    public void theBookWithItsUniqueIdentifierAedEbFFbEFffFForAuthorBbDafCCFABeAeAAc(String title, String bookIdentifier, String authorIdentifier) {
+        books.save(new Book(UUID.fromString(bookIdentifier), title, UUID.fromString(authorIdentifier)));
+    }
+
     @When("I create a book titled {string} for author {word}")
     public void i_create_a_book_titled_for_author(String title, String authorIdentifier) {
         try {
@@ -44,4 +50,5 @@ public class CreateABookStepDefs {
         assertThat(books.findAll()).contains(book);
         assertThat(book).isEqualTo(new Book(UUID.fromString(bookIdentifier), title, UUID.fromString(authorIdentifier)));
     }
+
 }

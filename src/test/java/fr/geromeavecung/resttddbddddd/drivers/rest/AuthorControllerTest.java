@@ -2,7 +2,7 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthorCommand;
-import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthorsCommand;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.junit.jupiter.api.DisplayNameGeneration;
