@@ -42,4 +42,9 @@ public class AuthorsFromDatabase implements Authors {
         return authorsRepository.findByFirstNameAndLastName(author.firstName(), author.lastName())
                 .map(AuthorEntity::convert);
     }
+
+    @Override
+    public Optional<Author> find(UUID identifier) {
+        return Optional.empty();
+    }
 }

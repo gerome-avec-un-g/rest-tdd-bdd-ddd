@@ -1,7 +1,7 @@
 package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthorCommand;
 import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import io.cucumber.java.en.Given;
@@ -52,7 +52,7 @@ public class CreateAnAuthorStepDefs {
 
     private void createAnAuthor(String firstName, String lastName) {
         try {
-            author = createAnAuthor.execute(new AuthorCreationCommand(SharedStepDefs.sanitize(firstName), SharedStepDefs.sanitize(lastName)));
+            author = createAnAuthor.execute(new CreateAnAuthorCommand(SharedStepDefs.sanitize(firstName), SharedStepDefs.sanitize(lastName)));
         } catch (Exception exception) {
             LOGGER.error(exception.getMessage());
             sharedState.setException(exception);

@@ -1,7 +1,7 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorsSearchCommand;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class AuthorController {
 
     @GetMapping
     public ResponseEntity<AuthorsSearchResponse> searchForAuthors(@RequestParam String searchTerm) {
-        List<Author> authors = searchForAuthors.execute(new AuthorsSearchCommand(searchTerm));
+        List<Author> authors = searchForAuthors.execute(new SearchForAuthorsCommand(searchTerm));
         return ResponseEntity.ok(new AuthorsSearchResponse(authors));
     }
 

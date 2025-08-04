@@ -2,7 +2,6 @@ package fr.geromeavecung.resttddbddddd.domain.usecases;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreation;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.IdentifierGenerator;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +16,8 @@ public class CreateAnAuthor {
         this.identifierGenerator = identifierGenerator;
     }
 
-    public Author execute(AuthorCreationCommand authorCreationCommand) {
-        Author author = authorCreationCommand.convert(identifierGenerator.generate());
+    public Author execute(CreateAnAuthorCommand createAnAuthorCommand) {
+        Author author = createAnAuthorCommand.convert(identifierGenerator.generate());
         authorCreation.save(author);
         return author;
     }

@@ -5,13 +5,13 @@ Feature: Search for authors
   Rule: Search for authors by first name, last name or partial combination of both
     Scenario Outline: search term
       Given The following authors in the system
-        | first name | last name |
-        | John       | Doe       |
-        | John       | Doherty   |
-        | Johann     | Hari      |
-        | Jane       | Doe       |
-        | Jane       | Austen    |
-        | Isaac      | Asimov    |
+        | author identifier                    | first name | last name |
+        | 59127042-7a81-4922-a5bd-57090bd01726 | John       | Doe       |
+        | 9b53aa7f-2c58-4e9b-889a-73e09236e0eb | John       | Doherty   |
+        | da7557ff-9236-46db-90f7-074029dae4ad | Johann     | Hari      |
+        | ec9a8831-90f0-4705-893e-3e023c7b3115 | Jane       | Doe       |
+        | 589a0b4c-93b8-4f46-8c7e-02794a8c252e | Jane       | Austen    |
+        | 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac | Isaac      | Asimov    |
       When I search for "<search term>"
       Then the result contains "<result>"
       Examples:
@@ -36,9 +36,9 @@ Feature: Search for authors
       When I search for "<search term>"
       Then an error is raised with message "<error message>"
       Examples:
-        | search term           | error message                                                          |
-        | [null]                | search term 'null' is mandatory                                        |
-        | [empty]               | search term '' is mandatory                                            |
-        | [blank]               | search term ' ' is mandatory                                           |
+        | search term           | error message                                                           |
+        | [null]                | search term 'null' is mandatory                                         |
+        | [empty]               | search term '' is mandatory                                             |
+        | [blank]               | search term ' ' is mandatory                                            |
         | Do                    | search term 'Do' must be between 3 and 20 characters                    |
         | AsimovAsimovAsimovAsi | search term 'AsimovAsimovAsimovAsi' must be between 3 and 20 characters |

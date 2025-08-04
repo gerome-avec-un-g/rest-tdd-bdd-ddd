@@ -1,7 +1,7 @@
 package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorsSearchCommand;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.fakes.AuthorsInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import io.cucumber.java.DataTableType;
@@ -36,7 +36,7 @@ public class SearchForAuthorsStepDefs {
 
     @DataTableType
     public Author author(Map<String, String> row) {
-        return new Author(UUID.randomUUID(), row.get("first name"), row.get("last name"));
+        return new Author(UUID.fromString(row.get("author identifier")), row.get("first name"), row.get("last name"));
     }
 
     @Given("The following authors in the system")
@@ -47,7 +47,7 @@ public class SearchForAuthorsStepDefs {
     @When("I search for {string}")
     public void i_search_for_search_term(String searchTerm) {
         try {
-            authors = searchForAuthors.execute(new AuthorsSearchCommand(SharedStepDefs.sanitize(searchTerm)));
+            authors = searchForAuthors.execute(new SearchForAuthorsCommand(SharedStepDefs.sanitize(searchTerm)));
         } catch (Exception exception) {
             LOGGER.error(exception.getMessage());
             sharedState.setException(exception);

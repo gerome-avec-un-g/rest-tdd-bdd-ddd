@@ -1,13 +1,13 @@
-package fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors;
+package fr.geromeavecung.resttddbddddd.domain.usecases;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
 
-public record AuthorsSearchCommand(String searchTerm) {
+public record SearchForAuthorsCommand(String searchTerm) {
 
     private static final int MINIMUM_NAME_SIZE = 3;
     private static final int MAXIMUM_NAME_SIZE = 20;
 
-    public AuthorsSearchCommand {
+    public SearchForAuthorsCommand {
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
             throw new ValidationException("search term '%s' is mandatory".formatted(searchTerm));
         }

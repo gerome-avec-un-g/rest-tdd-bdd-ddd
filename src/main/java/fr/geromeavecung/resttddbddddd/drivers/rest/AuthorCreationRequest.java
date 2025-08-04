@@ -1,11 +1,11 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthorCommand;
 
 public record AuthorCreationRequest(String firstName, String lastName) {
 
-    AuthorCreationCommand convert() {
-        return new AuthorCreationCommand(firstName, lastName);
+    CreateAnAuthorCommand convert() {
+        return new CreateAnAuthorCommand(firstName, lastName);
     }
 
 }

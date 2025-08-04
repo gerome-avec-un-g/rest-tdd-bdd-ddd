@@ -1,8 +1,8 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorCreationCommand;
-import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorsSearchCommand;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthorCommand;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -42,7 +42,7 @@ class AuthorControllerTest {
     @Test
     void create_an_author() throws Exception {
         Author author = new Author(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), "Isaac", "Asimov");
-        when(createAnAuthor.execute(new AuthorCreationCommand("Isaac", "Asimov"))).thenReturn(author);
+        when(createAnAuthor.execute(new CreateAnAuthorCommand("Isaac", "Asimov"))).thenReturn(author);
 
         mockMvc.perform(post("/authors")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -65,7 +65,7 @@ class AuthorControllerTest {
     @Test
     void find_an_author() throws Exception {
         Author author = new Author(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), "Isaac", "Asimov");
-        when(searchForAuthors.execute(new AuthorsSearchCommand("Asimov"))).thenReturn(List.of(author));
+        when(searchForAuthors.execute(new SearchForAuthorsCommand("Asimov"))).thenReturn(List.of(author));
 
         mockMvc.perform(get("/authors?searchTerm=Asimov"))
                 .andDo(print())

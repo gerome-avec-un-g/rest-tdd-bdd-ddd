@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class AuthorsInMemory implements Authors {
@@ -27,6 +28,13 @@ public class AuthorsInMemory implements Authors {
         return values.stream()
                 .filter(existingAuthor -> existingAuthor.firstName().equals(author.firstName())
                         && existingAuthor.lastName().equals(author.lastName()))
+                .findFirst();
+    }
+
+    @Override
+    public Optional<Author> find(UUID identifier) {
+        return values.stream()
+                .filter(existingAuthor -> existingAuthor.identifier().equals(identifier))
                 .findFirst();
     }
 }
