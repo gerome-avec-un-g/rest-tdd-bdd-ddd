@@ -16,12 +16,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/authors")
-public class AuthorController {
+public class AuthorsController {
 
     private final CreateAnAuthor createAnAuthor;
     private final SearchForAuthors searchForAuthors;
 
-    public AuthorController(CreateAnAuthor createAnAuthor, SearchForAuthors searchForAuthors) {
+    public AuthorsController(CreateAnAuthor createAnAuthor, SearchForAuthors searchForAuthors) {
         this.createAnAuthor = createAnAuthor;
         this.searchForAuthors = searchForAuthors;
     }

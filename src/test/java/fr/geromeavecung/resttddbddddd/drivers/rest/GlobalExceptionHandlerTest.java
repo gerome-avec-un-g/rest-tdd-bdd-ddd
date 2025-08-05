@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ContextConfiguration(classes = {GlobalExceptionHandler.class, AuthorController.class})
+@ContextConfiguration(classes = {GlobalExceptionHandler.class, AuthorsController.class})
 @WebMvcTest
 class GlobalExceptionHandlerTest {
 

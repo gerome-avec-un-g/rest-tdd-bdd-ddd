@@ -36,7 +36,7 @@ public class SearchForAuthorsStepDefs {
 
     @DataTableType
     public Author author(Map<String, String> row) {
-        return new Author(UUID.fromString(row.get("author identifier")), row.get("first name"), row.get("last name"));
+        return new Author(UUID.fromString(row.get("author bookIdentifier")), row.get("first name"), row.get("last name"));
     }
 
     @Given("The following authors in the system")

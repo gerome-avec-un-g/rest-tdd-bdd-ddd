@@ -25,10 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ContextConfiguration(classes = {AuthorController.class})
+@ContextConfiguration(classes = {AuthorsController.class})
 @WebMvcTest
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class AuthorControllerTest {
+class AuthorsControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
