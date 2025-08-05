@@ -30,6 +30,8 @@ public class AuthorsFromDatabase implements Authors {
         repository.save(new AuthorEntity(author));
     }
 
+    // TODO dto projection
+
     @Override
     public List<Author> findAll() {
         return repository.findAll().stream()
