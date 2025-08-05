@@ -1,9 +1,12 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.BookTitle;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthorCommand;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.FindBooksByAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -38,6 +41,9 @@ class AuthorsControllerTest {
 
     @MockitoBean
     private SearchForAuthors searchForAuthors;
+
+    @MockitoBean
+    private FindBooksByAuthor findBooksByAuthor;
 
     @Test
     void create_an_author() throws Exception {
@@ -80,6 +86,33 @@ class AuthorsControllerTest {
                             }
                           ]
                         }"""));
+
+    }
+
+    @Test
+    void find_books_by_author() throws Exception {
+        Book book1 = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+        Book book2 = new Book(UUID.fromString("589a0b4c-93b8-4f46-8c7e-02794a8c252e"), new BookTitle("Prelude to Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+        when(findBooksByAuthor.execute(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"))).thenReturn(List.of(book1, book2));
+
+        mockMvc.perform(get("/authors/1160aed8-eb2f-4fb3-92e4-43480fff64f5/books"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {
+                           "books": [
+                             {
+                               "bookIdentifier": "1160aed8-eb2f-4fb3-92e4-43480fff64f5",
+                               "title": "Foundation",
+                               "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
+                             },
+                             {
+                               "bookIdentifier": "589a0b4c-93b8-4f46-8c7e-02794a8c252e",
+                               "title": "Prelude to Foundation",
+                               "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
+                             }
+                           ]
+                         }"""));
 
     }
 

@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
   "title": "Foundation",
-  "authorIdentifier": "ec8412f2-0253-41a2-9858-18bb19bcd19c"
+  "authorIdentifier": "1749d87c-a2a1-4495-bf19-8a1c67e7c8df"
 }
 
 ### add book
@@ -43,5 +43,5 @@ Content-Type: application/json
 
 {
   "title": "Prelude to Foundation",
-  "authorIdentifier": "ec8412f2-0253-41a2-9858-18bb19bcd19c"
+  "authorIdentifier": "1749d87c-a2a1-4495-bf19-8a1c67e7c8df"
 }
