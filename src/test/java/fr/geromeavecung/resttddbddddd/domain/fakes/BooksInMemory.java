@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public class BooksInMemory implements Books {
 
-    List<Book> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
 
     @Override
     public void save(Book book) {
