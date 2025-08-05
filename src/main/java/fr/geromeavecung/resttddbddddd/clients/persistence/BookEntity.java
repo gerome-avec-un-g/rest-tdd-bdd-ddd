@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.Year;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class BookEntity {
     public BookEntity(Book book) {
         this.bookIdentifier = book.bookIdentifier();
         this.title = book.title().value();
+        this.publicationDate = book.publicationDate().getValue();
         this.authorIdentifier = book.authorIdentifier();
     }
 
@@ -30,6 +32,9 @@ public class BookEntity {
 
     @Column
     private String title;
+
+    @Column
+    private int publicationDate;
 
     @Column
     private UUID authorIdentifier;
@@ -47,7 +52,7 @@ public class BookEntity {
     }
 
     public Book convert() {
-        return new Book(bookIdentifier, new BookTitle(title), authorIdentifier);
+        return new Book(bookIdentifier, new BookTitle(title), Year.of(publicationDate), authorIdentifier);
     }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.Year;
 import java.util.UUID;
 
 import static org.mockito.Mockito.when;
@@ -35,14 +36,15 @@ class BooksControllerTest {
 
     @Test
     void create_a_book() throws Exception {
-        Book book = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
-        when(createABook.execute(new CreateABookCommand("Foundation", "c6625e54-d4e8-4ba0-942e-d285839527e1"))).thenReturn(book);
+        Book book = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), Year.of(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+        when(createABook.execute(new CreateABookCommand("Foundation", "1951", "c6625e54-d4e8-4ba0-942e-d285839527e1"))).thenReturn(book);
 
         mockMvc.perform(post("/books")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
                                     "title": "Foundation",
+                                    "publicationDate": "1951",
                                     "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
                                 }"""))
                 .andDo(print())
@@ -51,6 +53,7 @@ class BooksControllerTest {
                         {
                             "bookIdentifier": "1160aed8-eb2f-4fb3-92e4-43480fff64f5",
                             "title": "Foundation",
+                            "publicationDate": "1951",
                             "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
                         }"""));
 

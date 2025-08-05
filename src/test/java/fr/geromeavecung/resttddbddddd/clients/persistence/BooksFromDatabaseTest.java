@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.time.Year;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ class BooksFromDatabaseTest {
 
     @Test
     void save() {
-        Book book = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+        Book book = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), Year.of(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
 
         booksFromDatabase.save(book);
 
@@ -49,7 +50,7 @@ class BooksFromDatabaseTest {
 
         @Test
         void read_all_book_for_author_with_1_book() {
-            Book book1 = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+            Book book1 = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), Year.of(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
             booksFromDatabase.save(book1);
 
             List<Book> actualBooks = booksFromDatabase.findAllByAuthor(UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
@@ -59,9 +60,9 @@ class BooksFromDatabaseTest {
 
         @Test
         void read_all_book_for_author_with_2_books() {
-            Book book1 = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+            Book book1 = new Book(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), new BookTitle("Foundation"), Year.of(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
             booksFromDatabase.save(book1);
-            Book book2 = new Book(UUID.fromString("589a0b4c-93b8-4f46-8c7e-02794a8c252e"), new BookTitle("Prelude to Foundation"), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+            Book book2 = new Book(UUID.fromString("589a0b4c-93b8-4f46-8c7e-02794a8c252e"), new BookTitle("Prelude to Foundation"), Year.of(1988), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
             booksFromDatabase.save(book2);
 
             List<Book> actualBooks = booksFromDatabase.findAllByAuthor(UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
