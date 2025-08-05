@@ -1,5 +1,6 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.NotFoundException;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -16,6 +17,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info(exception.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
         return new ResponseEntity<>(problemDetail, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({NotFoundException.class})
+    public ResponseEntity<ProblemDetail> handleNotFoundException(final NotFoundException exception) {
+        logger.info(exception.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.getMessage());
+        return new ResponseEntity<>(problemDetail, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({Exception.class})

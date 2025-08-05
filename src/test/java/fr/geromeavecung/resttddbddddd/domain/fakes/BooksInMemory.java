@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -23,6 +24,11 @@ public class BooksInMemory implements Books {
         return books.stream()
                 .filter(book -> book.authorIdentifier().equals(authorIdentifier))
                 .toList();
+    }
+
+    @Override
+    public Optional<Book> findByIdentifier(UUID bookIdentifier) {
+        return Optional.empty();
     }
 
     public List<Book> findAll() {

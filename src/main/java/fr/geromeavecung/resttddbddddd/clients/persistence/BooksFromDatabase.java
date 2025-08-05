@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -34,6 +35,11 @@ public class BooksFromDatabase implements Books {
         return repository.findAllByAuthorIdentifier(authorIdentifier).stream()
                 .map(BookEntity::convert)
                 .toList();
+    }
+
+    @Override
+    public Optional<Book> findByIdentifier(UUID bookIdentifier) {
+        return repository.findById(bookIdentifier).map(BookEntity::convert);
     }
 
 }
