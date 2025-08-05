@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
   "title": "Foundation",
-  "authorIdentifier": "6d87012e-ebe1-4c98-a8a3-6782faeb0354"
+  "authorIdentifier": "9661f79e-d842-4e0f-afc4-592470ddd2cb"
 }
 
 ### add book
@@ -43,8 +43,8 @@ Content-Type: application/json
 
 {
   "title": "Prelude to Foundation",
-  "authorIdentifier": "6d87012e-ebe1-4c98-a8a3-6782faeb0354"
+  "authorIdentifier": "9661f79e-d842-4e0f-afc4-592470ddd2cb"
 }
 
 ### search books by author
-GET http://localhost:8080/authors/6d87012e-ebe1-4c98-a8a3-6782faeb0354/books
+GET http://localhost:8080/authors/9661f79e-d842-4e0f-afc4-592470ddd2cb/books

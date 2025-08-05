@@ -5,12 +5,15 @@ import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.BookTitle;
 import fr.geromeavecung.resttddbddddd.domain.fakes.BooksInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABookCommand;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,20 +23,31 @@ public class CreateABookStepDefs {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateABookStepDefs.class);
 
     private final CreateABook createABook;
-    private final BooksInMemory books;
+    private final BooksInMemory booksInMemory;
     private final SharedState sharedState;
 
     private Book book;
 
-    public CreateABookStepDefs(CreateABook createABook, BooksInMemory books, SharedState sharedState) {
+    public CreateABookStepDefs(CreateABook createABook, BooksInMemory booksInMemory, SharedState sharedState) {
         this.createABook = createABook;
-        this.books = books;
+        this.booksInMemory = booksInMemory;
         this.sharedState = sharedState;
+    }
+
+    @DataTableType
+    public Book book(Map<String, String> row) {
+        // TODO ? Book have a String constructor ? or use request/command(can't no UUID?)?
+        return new Book(UUID.fromString(row.get("book identifier")), new BookTitle(row.get("title")), UUID.fromString(row.get("author identifier")));
     }
 
     @Given("the book {string} with its unique identifier {word} for author {word}")
     public void theBookWithItsUniqueIdentifierAedEbFFbEFffFForAuthorBbDafCCFABeAeAAc(String title, String bookIdentifier, String authorIdentifier) {
-        books.save(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), UUID.fromString(authorIdentifier)));
+        booksInMemory.save(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), UUID.fromString(authorIdentifier)));
+    }
+
+    @Given("the following books in the system")
+    public void the_following_books_in_the_system(List<Book> books) {
+        books.forEach(booksInMemory::save);
     }
 
     @When("I create a book titled {string} for author {word}")
@@ -48,7 +62,7 @@ public class CreateABookStepDefs {
 
     @Then("the book {string} is created with its unique identifier {word} for author {word}")
     public void the_book_is_created_with_its_unique_identifier_for_author(String title, String bookIdentifier, String authorIdentifier) {
-        assertThat(books.findAll()).contains(book);
+        assertThat(booksInMemory.findAll()).contains(book);
         assertThat(book).isEqualTo(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), UUID.fromString(authorIdentifier)));
     }
 
