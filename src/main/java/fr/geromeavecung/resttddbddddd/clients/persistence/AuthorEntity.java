@@ -25,13 +25,13 @@ public class AuthorEntity {
     }
 
     @Id
-    @Column
+    @Column(name="IDENTIFIER")
     private UUID identifier;
 
-    @Column
+    @Column(name="FIRSTNAME")
     private String firstName;
 
-    @Column
+    @Column(name="LASTNAME")
     private String lastName;
 
     @Override

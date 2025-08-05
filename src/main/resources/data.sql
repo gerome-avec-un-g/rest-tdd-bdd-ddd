@@ -1,0 +1,3 @@
+insert into AUTHORS (identifier, firstName, lastName) values ('200d7499-8ffa-4bdd-8443-08a36b678886', 'Isaac', 'Asimov');
+insert into BOOKS (BOOK_IDENTIFIER, TITLE, PUBLICATION_DATE, AUTHOR_IDENTIFIER) values ('afc1ca0e-803c-483f-85c3-c9657b43936a', 'Foundation', '1951', '200d7499-8ffa-4bdd-8443-08a36b678886');
+insert into BOOKS (BOOK_IDENTIFIER, TITLE, PUBLICATION_DATE, AUTHOR_IDENTIFIER) values ('589a0b4c-93b8-4f46-8c7e-02794a8c252e', 'Prelude to Foundation', '1988', '200d7499-8ffa-4bdd-8443-08a36b678886');

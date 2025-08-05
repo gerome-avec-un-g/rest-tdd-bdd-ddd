@@ -3,26 +3,8 @@ POST http://localhost:8080/authors
 Content-Type: application/json
 
 {
-  "firstName": "Isaac",
-  "lastName": "Asimov"
-}
-
-### add author
-POST http://localhost:8080/authors
-Content-Type: application/json
-
-{
 "firstName": "John",
 "lastName": "Doe"
-}
-
-### add author
-POST http://localhost:8080/authors
-Content-Type: application/json
-
-{
-  "firstName": "Jane",
-  "lastName": "Doe"
 }
 
 ### search author by name
@@ -33,18 +15,8 @@ POST http://localhost:8080/books
 Content-Type: application/json
 
 {
-  "title": "Foundation",
-  "publicationDate": "1951",
-  "authorIdentifier": "200d7499-8ffa-4bdd-8443-08a36b678886"
-}
-
-### add book
-POST http://localhost:8080/books
-Content-Type: application/json
-
-{
-  "title": "Prelude to Foundation",
-  "publicationDate": "1988",
+  "title": "Forward the Foundation",
+  "publicationDate": "1993",
   "authorIdentifier": "200d7499-8ffa-4bdd-8443-08a36b678886"
 }
 

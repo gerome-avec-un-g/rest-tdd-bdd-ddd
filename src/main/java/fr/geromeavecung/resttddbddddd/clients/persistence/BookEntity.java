@@ -27,16 +27,16 @@ public class BookEntity {
     }
 
     @Id
-    @Column
+    @Column(name="BOOK_IDENTIFIER")
     private UUID bookIdentifier;
 
-    @Column
+    @Column(name="TITLE")
     private String title;
 
-    @Column
+    @Column(name="PUBLICATION_DATE")
     private int publicationDate;
 
-    @Column
+    @Column(name="AUTHOR_IDENTIFIER")
     private UUID authorIdentifier;
 
     @Override
