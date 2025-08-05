@@ -3,6 +3,7 @@ package fr.geromeavecung.resttddbddddd.domain.usecases;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.AuthorSearchByName;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.SearchForAuthorsCommand;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class SearchForAuthors {
     }
 
     public List<Author> execute(SearchForAuthorsCommand searchCommand) {
-        return authorSearchByName.execute(searchCommand);
+        List<Author> authors = authorSearchByName.execute(searchCommand);
+        if (authors.isEmpty()) {
+            throw new NotFoundException("Authors named '%s' not found".formatted(searchCommand.searchTerm()));
+        }
+        return authors;
     }
 }

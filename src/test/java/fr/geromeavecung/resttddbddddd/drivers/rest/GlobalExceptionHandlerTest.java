@@ -1,6 +1,7 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.BusinessException;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.NotFoundException;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchBooksByAuthor;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -55,6 +57,24 @@ class GlobalExceptionHandlerTest {
                            "title": "Bad Request",
                            "status": 400,
                            "detail": "first name 'null' is mandatory",
+                           "instance": "/authors"
+                         }"""));
+
+    }
+
+    @Test
+    void not_found_exceptions_return_status_not_found() throws Exception {
+        when(searchForAuthors.execute(any())).thenThrow(new NotFoundException("Authors named 'Asimov' not found"));
+
+        mockMvc.perform(get("/authors?searchTerm=Asimov"))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("""
+                        {
+                           "type": "about:blank",
+                           "title": "Not Found",
+                           "status": 404,
+                           "detail": "Authors named 'Asimov' not found",
                            "instance": "/authors"
                          }"""));
 

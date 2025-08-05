@@ -41,9 +41,6 @@ public class AuthorsController {
         return ResponseEntity.ok(new AuthorsSearchResponse(authors));
     }
 
-    // TODO query param
-    // TODO HATEOAS
-
     @GetMapping("/{authorIdentifier}/books")
     public ResponseEntity<FindBooksByAuthorResponse> findBooksByAuthor(@PathVariable String authorIdentifier) {
         List<Book> books = searchBooksByAuthor.execute(UUID.fromString(authorIdentifier));
