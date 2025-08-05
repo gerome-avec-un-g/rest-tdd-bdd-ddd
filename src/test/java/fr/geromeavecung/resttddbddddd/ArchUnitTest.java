@@ -12,6 +12,8 @@ class ArchUnitTest {
 
     public static final JavaClasses CLASSES = new ClassFileImporter().importPackages("fr.geromeavecung.resttddbddddd");
 
+    // TODO replace by Spring Modulith
+
     @Test
     void domain_cant_depend_on_drivers() {
         ArchRule rule = noClasses().that().resideInAPackage("..domain..")
