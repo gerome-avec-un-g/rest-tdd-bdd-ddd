@@ -2,6 +2,7 @@ package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.BookTitle;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.ISBN;
 import fr.geromeavecung.resttddbddddd.domain.fakes.BooksInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABookCommand;
@@ -38,12 +39,12 @@ public class CreateABookStepDefs {
     @DataTableType
     public Book book(Map<String, String> row) {
         // TODO ? Book have a String constructor ? or use request/command(can't no UUID?)?
-        return new Book(UUID.fromString(row.get("book identifier")), new BookTitle(row.get("title")), Year.parse(row.get("publication date")), UUID.fromString(row.get("author identifier")));
+        return new Book(new ISBN(row.get("ISBN")), new BookTitle(row.get("title")), Year.parse(row.get("publication date")), UUID.fromString(row.get("author identifier")));
     }
 
-    @Given("the book {string} published in {word} with its unique identifier {word} for author {word}")
-    public void theBookWithItsUniqueIdentifierAedEbFFbEFffFForAuthorBbDafCCFABeAeAAc(String title, String publicationDate, String bookIdentifier, String authorIdentifier) {
-        booksInMemory.save(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), Year.parse(publicationDate), UUID.fromString(authorIdentifier)));
+    @Given("the book {string} published in {word} with ISBN {word} for author {word}")
+    public void theBookWithItsUniqueIdentifierAedEbFFbEFffFForAuthorBbDafCCFABeAeAAc(String title, String publicationDate, String isbn, String authorIdentifier) {
+        booksInMemory.save(new Book(new ISBN(isbn), new BookTitle(title), Year.parse(publicationDate), UUID.fromString(authorIdentifier)));
     }
 
     @Given("the following books in the system")
@@ -51,20 +52,20 @@ public class CreateABookStepDefs {
         books.forEach(booksInMemory::save);
     }
 
-    @When("I create a book titled {string} published in {word} for author {word}")
-    public void i_create_a_book_titled_for_author(String title, String publicationDate, String authorIdentifier) {
+    @When("I create a book titled {string} published in {word} with ISBN {word} for author {word}")
+    public void i_create_a_book_titled_for_author(String title, String publicationDate, String isbn, String authorIdentifier) {
         try {
-            book = createABook.execute(new CreateABookCommand(SharedStepDefs.sanitize(title), publicationDate, authorIdentifier));
+            book = createABook.execute(new CreateABookCommand(isbn, SharedStepDefs.sanitize(title), publicationDate, authorIdentifier));
         } catch (Exception exception) {
             LOGGER.error(exception.getMessage());
             sharedState.setException(exception);
         }
     }
 
-    @Then("the book {string} published in {word} is created with its unique identifier {word} for author {word}")
-    public void the_book_is_created_with_its_unique_identifier_for_author(String title, String publicationDate, String bookIdentifier, String authorIdentifier) {
+    @Then("the book {string} published in {word} is created with ISBN {word} for author {word}")
+    public void the_book_is_created_with_its_unique_identifier_for_author(String title, String publicationDate, String isbn, String authorIdentifier) {
         assertThat(booksInMemory.findAll()).contains(book);
-        assertThat(book).isEqualTo(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), Year.parse(publicationDate), UUID.fromString(authorIdentifier)));
+        assertThat(book).isEqualTo(new Book(new ISBN(isbn), new BookTitle(title), Year.parse(publicationDate), UUID.fromString(authorIdentifier)));
     }
 
 }

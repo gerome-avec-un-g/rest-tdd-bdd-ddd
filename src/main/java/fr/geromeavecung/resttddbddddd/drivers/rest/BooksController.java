@@ -1,6 +1,7 @@
 package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.ISBN;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchABookByIdentifier;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/books")
@@ -25,9 +24,9 @@ public class BooksController {
         this.searchABookByIdentifier = searchABookByIdentifier;
     }
 
-    @GetMapping("/{bookIdentifier}")
-    public ResponseEntity<BookCreationResponse> searchForBook(@PathVariable String bookIdentifier) {
-        Book book = searchABookByIdentifier.execute(UUID.fromString(bookIdentifier));
+    @GetMapping("/{isbn}")
+    public ResponseEntity<BookCreationResponse> searchForBook(@PathVariable String isbn) {
+        Book book = searchABookByIdentifier.execute(new ISBN(isbn));
         return ResponseEntity.ok(BookCreationResponse.create(book));
     }
 

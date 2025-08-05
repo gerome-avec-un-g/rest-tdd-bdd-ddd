@@ -2,6 +2,7 @@ package fr.geromeavecung.resttddbddddd.domain.usecases;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.BookSearchByIdentifier;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.ISBN;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,8 @@ public class SearchABookByIdentifier {
         this.bookSearchByIdentifier = bookSearchByIdentifier;
     }
 
-    public Book execute(UUID bookIdentifier) {
-        return bookSearchByIdentifier.execute(bookIdentifier).orElseThrow(() -> new NotFoundException("Book %s not found".formatted(bookIdentifier)));
+    public Book execute(ISBN isbn) {
+        return bookSearchByIdentifier.execute(isbn).orElseThrow(() -> new NotFoundException("Book %s not found".formatted(isbn)));
     }
 
 }

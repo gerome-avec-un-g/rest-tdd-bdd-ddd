@@ -2,6 +2,7 @@ package fr.geromeavecung.resttddbddddd.clients.persistence;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Books;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.ISBN;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class BooksFromDatabase implements Books {
 
     @Repository
-    public interface BooksRepository extends JpaRepository<BookEntity, UUID> {
+    public interface BooksRepository extends JpaRepository<BookEntity, String> {
 
         List<BookEntity> findAllByAuthorIdentifier(UUID authorIdentifier);
     }
@@ -38,8 +39,8 @@ public class BooksFromDatabase implements Books {
     }
 
     @Override
-    public Optional<Book> findByIdentifier(UUID bookIdentifier) {
-        return repository.findById(bookIdentifier).map(BookEntity::convert);
+    public Optional<Book> findByIdentifier(ISBN isbn) {
+        return repository.findById(isbn.toString()).map(BookEntity::convert);
     }
 
 }

@@ -15,6 +15,7 @@ POST http://localhost:8080/books
 Content-Type: application/json
 
 {
+  "isbn": "978-0553565072",
   "title": "Forward the Foundation",
   "publicationDate": "1993",
   "authorIdentifier": "200d7499-8ffa-4bdd-8443-08a36b678886"
@@ -24,4 +25,4 @@ Content-Type: application/json
 GET http://localhost:8080/authors/200d7499-8ffa-4bdd-8443-08a36b678886/books
 
 ### search books by identifier
-GET http://localhost:8080/books/afc1ca0e-803c-483f-85c3-c9657b43936a
+GET http://localhost:8080/books/978-0553293357

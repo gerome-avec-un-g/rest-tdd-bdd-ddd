@@ -5,24 +5,24 @@ import org.springframework.hateoas.RepresentationModel;
 
 public class BookCreationResponse extends RepresentationModel<BookCreationResponse> {
 
-    private final String bookIdentifier;
+    private final String isbn;
     private final String title;
     private final String publicationDate;
     private final String authorIdentifier;
 
     public static BookCreationResponse create(Book book) {
-        return new BookCreationResponse(book.bookIdentifier().toString(), book.title().value(), book.publicationDate().toString(), book.authorIdentifier().toString());
+        return new BookCreationResponse(book.isbn().toString(), book.title().value(), book.publicationDate().toString(), book.authorIdentifier().toString());
     }
 
-    private BookCreationResponse(String bookIdentifier, String title, String publicationDate, String authorIdentifier) {
-        this.bookIdentifier = bookIdentifier;
+    private BookCreationResponse(String isbn, String title, String publicationDate, String authorIdentifier) {
+        this.isbn = isbn;
         this.title = title;
         this.publicationDate = publicationDate;
         this.authorIdentifier = authorIdentifier;
     }
 
-    public String getBookIdentifier() {
-        return bookIdentifier;
+    public String getIsbn() {
+        return isbn;
     }
 
     public String getTitle() {

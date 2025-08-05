@@ -3,7 +3,6 @@ package fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class BookSearchByIdentifier {
@@ -14,8 +13,8 @@ public class BookSearchByIdentifier {
         this.books = books;
     }
 
-    public Optional<Book> execute(UUID bookIdentifier) {
-        return books.findByIdentifier(bookIdentifier);
+    public Optional<Book> execute(ISBN isbn) {
+        return books.findByIdentifier(isbn);
     }
 
 }

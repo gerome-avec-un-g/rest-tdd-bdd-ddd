@@ -1,6 +1,7 @@
 package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.ISBN;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchABookByIdentifier;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,9 +28,9 @@ public class SearchBookByIdentifierStepDefs {
     }
 
     @When("I search for the book {word}")
-    public void i_search_for_the_book(String bookIdentifier) {
+    public void i_search_for_the_book(String isbn) {
         try {
-            book = searchABookByIdentifier.execute(UUID.fromString(bookIdentifier));
+            book = searchABookByIdentifier.execute(new ISBN(isbn));
         } catch (Exception exception) {
             LOGGER.error(exception.getMessage());
             sharedState.setException(exception);

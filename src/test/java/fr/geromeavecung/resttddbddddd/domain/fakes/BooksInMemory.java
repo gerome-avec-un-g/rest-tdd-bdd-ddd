@@ -2,6 +2,7 @@ package fr.geromeavecung.resttddbddddd.domain.fakes;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Books;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.ISBN;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class BooksInMemory implements Books {
     }
 
     @Override
-    public Optional<Book> findByIdentifier(UUID bookIdentifier) {
+    public Optional<Book> findByIdentifier(ISBN isbn) {
         return books.stream()
-                .filter(book -> book.bookIdentifier().equals(bookIdentifier))
+                .filter(book -> book.isbn().equals(isbn))
                 .findFirst();
     }
 

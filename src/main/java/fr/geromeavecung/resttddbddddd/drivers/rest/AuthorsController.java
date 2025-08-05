@@ -47,7 +47,7 @@ public class AuthorsController {
         List<BookSummaryResponse> bookCreationResponses = books.stream()
                 .map(BookSummaryResponse::create)
                 .toList();
-        bookCreationResponses.forEach(bookCreationResponse -> bookCreationResponse.add(linkTo(methodOn(BooksController.class).searchForBook(bookCreationResponse.getBookIdentifier())).withSelfRel()));
+        bookCreationResponses.forEach(bookCreationResponse -> bookCreationResponse.add(linkTo(methodOn(BooksController.class).searchForBook(bookCreationResponse.getIsbn())).withSelfRel()));
         return ResponseEntity.ok(new FindBooksByAuthorResponse(bookCreationResponses));
     }
 

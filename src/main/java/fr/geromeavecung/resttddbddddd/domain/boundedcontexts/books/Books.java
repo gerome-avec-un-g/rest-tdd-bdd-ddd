@@ -8,6 +8,6 @@ public interface Books {
 
     void save(Book book);
     List<Book> findAllByAuthor(UUID authorIdentifier);
-    Optional<Book> findByIdentifier(UUID bookIdentifier);
+    Optional<Book> findByIdentifier(ISBN isbn);
 
 }
