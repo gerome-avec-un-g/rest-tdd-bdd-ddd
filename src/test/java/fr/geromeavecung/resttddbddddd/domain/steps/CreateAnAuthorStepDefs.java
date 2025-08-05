@@ -59,7 +59,7 @@ public class CreateAnAuthorStepDefs {
         }
     }
 
-    @Then("the author {word} {word} is created with its unique bookIdentifier {string}")
+    @Then("the author {word} {word} is created with its unique identifier {string}")
     public void the_author_firstName_lastname_is_created_with_its_unique_identifier(String firstName, String lastName, String uniqueIdentifier) {
         // TODO mock/H2
         assertThat(authors.findAll()).contains(author);

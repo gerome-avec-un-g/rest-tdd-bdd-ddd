@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class FindBooksByAuthor {
+public class SearchBooksByAuthor {
 
     public List<Book> execute(UUID authorIdentifier) {
         return null;

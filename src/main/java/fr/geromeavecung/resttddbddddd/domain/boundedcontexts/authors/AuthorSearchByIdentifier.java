@@ -17,6 +17,6 @@ public class AuthorSearchByIdentifier {
     public Author execute(UUID identifier) {
         // TODO just validate?
         return authors.find(identifier)
-                .orElseThrow(() -> new BusinessException("author bookIdentifier '%s' doesn't exists".formatted(identifier)));
+                .orElseThrow(() -> new BusinessException("author identifier '%s' doesn't exists".formatted(identifier)));
     }
 }

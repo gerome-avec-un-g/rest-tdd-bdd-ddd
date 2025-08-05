@@ -4,7 +4,7 @@ import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
-import fr.geromeavecung.resttddbddddd.domain.usecases.FindBooksByAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchBooksByAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +24,12 @@ public class AuthorsController {
 
     private final CreateAnAuthor createAnAuthor;
     private final SearchForAuthors searchForAuthors;
-    private final FindBooksByAuthor findBooksByAuthor;
+    private final SearchBooksByAuthor searchBooksByAuthor;
 
-    public AuthorsController(CreateAnAuthor createAnAuthor, SearchForAuthors searchForAuthors, FindBooksByAuthor findBooksByAuthor) {
+    public AuthorsController(CreateAnAuthor createAnAuthor, SearchForAuthors searchForAuthors, SearchBooksByAuthor searchBooksByAuthor) {
         this.createAnAuthor = createAnAuthor;
         this.searchForAuthors = searchForAuthors;
-        this.findBooksByAuthor = findBooksByAuthor;
+        this.searchBooksByAuthor = searchBooksByAuthor;
     }
 
     @GetMapping
@@ -38,9 +38,12 @@ public class AuthorsController {
         return ResponseEntity.ok(new AuthorsSearchResponse(authors));
     }
 
+    // TODO query param
+    // TODO HATEOAS
+
     @GetMapping("/{authorIdentifier}/books")
     public ResponseEntity<FindBooksByAuthorResponse> findBooksByAuthor(@PathVariable String authorIdentifier) {
-        List<Book> books = findBooksByAuthor.execute(UUID.fromString(authorIdentifier));
+        List<Book> books = searchBooksByAuthor.execute(UUID.fromString(authorIdentifier));
         return ResponseEntity.ok(new FindBooksByAuthorResponse(books.stream().map(BookCreationResponse::new).toList()));
     }
 

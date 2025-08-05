@@ -3,6 +3,7 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.BusinessException;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchBooksByAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ class GlobalExceptionHandlerTest {
 
     @MockitoBean
     private SearchForAuthors searchForAuthors;
+
+    @MockitoBean
+    private SearchBooksByAuthor searchBooksByAuthor;
 
     @Test
     void validation_exceptions_return_status_bad_request() throws Exception {
