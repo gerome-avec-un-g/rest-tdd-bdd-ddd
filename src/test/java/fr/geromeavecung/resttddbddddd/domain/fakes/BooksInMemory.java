@@ -28,7 +28,9 @@ public class BooksInMemory implements Books {
 
     @Override
     public Optional<Book> findByIdentifier(UUID bookIdentifier) {
-        return Optional.empty();
+        return books.stream()
+                .filter(book -> book.bookIdentifier().equals(bookIdentifier))
+                .findFirst();
     }
 
     public List<Book> findAll() {
