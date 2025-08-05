@@ -18,7 +18,7 @@ public class AuthorEntity {
     }
 
     public AuthorEntity(Author author) {
-        this.identifier = author.identifier().toString();
+        this.identifier = author.identifier();
         this.firstName = author.firstName();
         this.lastName = author.lastName();
 
@@ -26,7 +26,7 @@ public class AuthorEntity {
 
     @Id
     @Column
-    private String identifier;
+    private UUID identifier;
 
     @Column
     private String firstName;
@@ -47,6 +47,6 @@ public class AuthorEntity {
     }
 
     public Author convert() {
-        return new Author(UUID.fromString(identifier), firstName, lastName);
+        return new Author(identifier, firstName, lastName);
     }
 }

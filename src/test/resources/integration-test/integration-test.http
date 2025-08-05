@@ -1,4 +1,4 @@
-### name
+### add author
 POST http://localhost:8080/authors
 Content-Type: application/json
 
@@ -7,7 +7,7 @@ Content-Type: application/json
   "lastName": "Asimov"
 }
 
-###
+### add author
 POST http://localhost:8080/authors
 Content-Type: application/json
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 "lastName": "Doe"
 }
 
-###
+### add author
 POST http://localhost:8080/authors
 Content-Type: application/json
 
@@ -25,5 +25,23 @@ Content-Type: application/json
   "lastName": "Doe"
 }
 
-###
-GET http://localhost:8080/authors?searchTerm=Doe
+### search author by name
+GET http://localhost:8080/authors?searchTerm=Asimov
+
+### add book
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Foundation",
+  "authorIdentifier": "XXX"
+}
+
+### add book
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Prelude to Foundation",
+  "authorIdentifier": "XXX"
+}

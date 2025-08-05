@@ -1,6 +1,7 @@
 package fr.geromeavecung.resttddbddddd.domain.steps;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
+import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.BookTitle;
 import fr.geromeavecung.resttddbddddd.domain.fakes.BooksInMemory;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABookCommand;
@@ -32,7 +33,7 @@ public class CreateABookStepDefs {
 
     @Given("the book {string} with its unique identifier {word} for author {word}")
     public void theBookWithItsUniqueIdentifierAedEbFFbEFffFForAuthorBbDafCCFABeAeAAc(String title, String bookIdentifier, String authorIdentifier) {
-        books.save(new Book(UUID.fromString(bookIdentifier), title, UUID.fromString(authorIdentifier)));
+        books.save(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), UUID.fromString(authorIdentifier)));
     }
 
     @When("I create a book titled {string} for author {word}")
@@ -48,7 +49,7 @@ public class CreateABookStepDefs {
     @Then("the book {string} is created with its unique identifier {word} for author {word}")
     public void the_book_is_created_with_its_unique_identifier_for_author(String title, String bookIdentifier, String authorIdentifier) {
         assertThat(books.findAll()).contains(book);
-        assertThat(book).isEqualTo(new Book(UUID.fromString(bookIdentifier), title, UUID.fromString(authorIdentifier)));
+        assertThat(book).isEqualTo(new Book(UUID.fromString(bookIdentifier), new BookTitle(title), UUID.fromString(authorIdentifier)));
     }
 
 }

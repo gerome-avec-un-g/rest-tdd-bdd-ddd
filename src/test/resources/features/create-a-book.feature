@@ -28,6 +28,8 @@ Feature: Create a book
         | 9d628ae3          | Invalid UUID string: 9d628ae3 |
       # TODO ? better error message but it would mean to defer UUID conversion into Book class
 
+  # TODO trailing spaces
+
   Rule: the book's author must exists
     Example: the author doesn't exists
       When I create a book titled "Foundation" for author da7557ff-9236-46db-90f7-074029dae4ad
@@ -40,11 +42,20 @@ Feature: Create a book
     Example: the book doesn't exists for the author
       When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then the book "Foundation" is created with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      # should we go read author's name for an error message?
     Example: the book already exists for the author
       Given the book "Foundation" with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then an error is raised with message "Book 'Foundation' already exists for '8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac'"
-      # should we go read author's name for an error message?
+    Example: the book already exists with another case for the author
+      Given the book "Foundation" with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      When I create a book titled "foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      Then an error is raised with message "Book 'foundation' already exists for '8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac'"
+    Example: the book already exists without trailing spaces for the author
+      Given the book "Foundation" with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      When I create a book titled "Foundation   " for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      Then an error is raised with message "Book 'Foundation' already exists for '8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac'"
+      # error message does not contains trailing spaces
     Example: the book already exists for another author
       Given the book "Foundation" with its unique identifier 1160aed8-eb2f-4fb3-92e4-43480fff64f5 for author 589a0b4c-93b8-4f46-8c7e-02794a8c252e
       When I create a book titled "Foundation" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac

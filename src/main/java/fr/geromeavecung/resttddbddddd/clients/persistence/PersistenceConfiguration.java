@@ -1,4 +1,4 @@
-package fr.geromeavecung.resttddbddddd;
+package fr.geromeavecung.resttddbddddd.clients.persistence;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;

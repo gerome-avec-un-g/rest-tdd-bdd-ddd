@@ -16,8 +16,8 @@ public class BookCreation {
 
     public Book save(Book book) {
         List<Book> booksBySameAuthor = books.findAllByAuthor(book.authorIdentifier());
-        if (booksBySameAuthor.stream().anyMatch(existingBook -> existingBook.title().equals(book.title()))) {
-            throw new BusinessException("Book '%s' already exists for '%s'".formatted(book.title(), book.authorIdentifier()));
+        if (booksBySameAuthor.stream().anyMatch(existingBook -> existingBook.title().value().equalsIgnoreCase(book.title().value()))) {
+            throw new BusinessException("Book '%s' already exists for '%s'".formatted(book.title().value(), book.authorIdentifier()));
         }
         books.save(book);
         return book;

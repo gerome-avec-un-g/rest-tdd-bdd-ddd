@@ -19,32 +19,33 @@ public class AuthorsFromDatabase implements Authors {
 
     }
 
-    public AuthorsFromDatabase(AuthorsRepository authorsRepository) {
-        this.authorsRepository = authorsRepository;
-    }
+    private final AuthorsRepository repository;
 
-    private final AuthorsRepository authorsRepository;
+    public AuthorsFromDatabase(AuthorsRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void save(Author author) {
-        authorsRepository.save(new AuthorEntity(author));
+        repository.save(new AuthorEntity(author));
     }
 
     @Override
     public List<Author> findAll() {
-        return authorsRepository.findAll().stream()
+        return repository.findAll().stream()
                 .map(AuthorEntity::convert)
                 .toList();
     }
 
     @Override
     public Optional<Author> find(Author author) {
-        return authorsRepository.findByFirstNameAndLastName(author.firstName(), author.lastName())
+        return repository.findByFirstNameAndLastName(author.firstName(), author.lastName())
                 .map(AuthorEntity::convert);
     }
 
     @Override
     public Optional<Author> find(UUID identifier) {
-        return Optional.empty();
+        return repository.findById(identifier)
+                .map(AuthorEntity::convert);
     }
 }

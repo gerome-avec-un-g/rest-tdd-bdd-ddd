@@ -6,6 +6,6 @@ import java.util.UUID;
 public interface Books {
 
     void save(Book book);
-    List<Book> findAllByAuthor(UUID uuid);
+    List<Book> findAllByAuthor(UUID authorIdentifier);
 
 }
