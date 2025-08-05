@@ -2,26 +2,39 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchABookByIdentifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/books")
 public class BooksController {
 
     private final CreateABook createABook;
+    private final SearchABookByIdentifier searchABookByIdentifier;
 
-    public BooksController(CreateABook createABook) {
+    public BooksController(CreateABook createABook, SearchABookByIdentifier searchABookByIdentifier) {
         this.createABook = createABook;
+        this.searchABookByIdentifier = searchABookByIdentifier;
+    }
+
+    @GetMapping("/{bookIdentifier}")
+    public ResponseEntity<BookCreationResponse> searchForBook(@PathVariable String bookIdentifier) {
+        Book book = searchABookByIdentifier.execute(UUID.fromString(bookIdentifier));
+        return ResponseEntity.ok(BookCreationResponse.create(book));
     }
 
     @PostMapping
-    public ResponseEntity<BookCreationResponse> createAnAuthor(@RequestBody BookCreationRequest bookCreationRequest) {
+    public ResponseEntity<BookCreationResponse> createABook(@RequestBody BookCreationRequest bookCreationRequest) {
         Book book = createABook.execute(bookCreationRequest.convert());
-        return ResponseEntity.ok(new BookCreationResponse(book));
+        return ResponseEntity.ok(BookCreationResponse.create(book));
     }
 
 }

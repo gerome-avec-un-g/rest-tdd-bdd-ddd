@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping(value = "/authors")
 public class AuthorsController {
@@ -44,7 +47,11 @@ public class AuthorsController {
     @GetMapping("/{authorIdentifier}/books")
     public ResponseEntity<FindBooksByAuthorResponse> findBooksByAuthor(@PathVariable String authorIdentifier) {
         List<Book> books = searchBooksByAuthor.execute(UUID.fromString(authorIdentifier));
-        return ResponseEntity.ok(new FindBooksByAuthorResponse(books.stream().map(BookCreationResponse::new).toList()));
+        List<BookSummaryResponse> bookCreationResponses = books.stream()
+                .map(BookSummaryResponse::create)
+                .toList();
+        bookCreationResponses.forEach(bookCreationResponse -> bookCreationResponse.add(linkTo(methodOn(BooksController.class).searchForBook(bookCreationResponse.getBookIdentifier())).withSelfRel()));
+        return ResponseEntity.ok(new FindBooksByAuthorResponse(bookCreationResponses));
     }
 
     @PostMapping

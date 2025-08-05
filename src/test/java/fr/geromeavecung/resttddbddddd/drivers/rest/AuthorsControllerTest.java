@@ -101,19 +101,31 @@ class AuthorsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
-                           "books": [
-                             {
-                               "bookIdentifier": "1160aed8-eb2f-4fb3-92e4-43480fff64f5",
-                               "title": "Foundation",
-                               "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
-                             },
-                             {
-                               "bookIdentifier": "589a0b4c-93b8-4f46-8c7e-02794a8c252e",
-                               "title": "Prelude to Foundation",
-                               "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
-                             }
-                           ]
-                         }"""));
+                          "books": [
+                            {
+                              "bookIdentifier": "1160aed8-eb2f-4fb3-92e4-43480fff64f5",
+                              "title": "Foundation",
+                              "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1",
+                              "links": [
+                                {
+                                  "rel": "self",
+                                  "href": "http://localhost/books/1160aed8-eb2f-4fb3-92e4-43480fff64f5"
+                                }
+                              ]
+                            },
+                            {
+                              "bookIdentifier": "589a0b4c-93b8-4f46-8c7e-02794a8c252e",
+                              "title": "Prelude to Foundation",
+                              "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1",
+                              "links": [
+                                {
+                                  "rel": "self",
+                                  "href": "http://localhost/books/589a0b4c-93b8-4f46-8c7e-02794a8c252e"
+                                }
+                              ]
+                            }
+                          ]
+                        }"""));
 
     }
 

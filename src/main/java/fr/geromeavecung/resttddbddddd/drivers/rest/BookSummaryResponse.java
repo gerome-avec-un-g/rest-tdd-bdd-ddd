@@ -3,21 +3,19 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.books.Book;
 import org.springframework.hateoas.RepresentationModel;
 
-public class BookCreationResponse extends RepresentationModel<BookCreationResponse> {
+public class BookSummaryResponse extends RepresentationModel<BookSummaryResponse> {
 
     private final String bookIdentifier;
     private final String title;
-    private final String publicationDate;
     private final String authorIdentifier;
 
-    public static BookCreationResponse create(Book book) {
-        return new BookCreationResponse(book.bookIdentifier().toString(), book.title().value(), book.publicationDate().toString(), book.authorIdentifier().toString());
+    public static BookSummaryResponse create(Book book) {
+        return new BookSummaryResponse(book.bookIdentifier().toString(), book.title().value(), book.authorIdentifier().toString());
     }
 
-    private BookCreationResponse(String bookIdentifier, String title, String publicationDate, String authorIdentifier) {
+    private BookSummaryResponse(String bookIdentifier, String title, String authorIdentifier) {
         this.bookIdentifier = bookIdentifier;
         this.title = title;
-        this.publicationDate = publicationDate;
         this.authorIdentifier = authorIdentifier;
     }
 
@@ -27,10 +25,6 @@ public class BookCreationResponse extends RepresentationModel<BookCreationRespon
 
     public String getTitle() {
         return title;
-    }
-
-    public String getPublicationDate() {
-        return publicationDate;
     }
 
     public String getAuthorIdentifier() {
