@@ -3,7 +3,9 @@ package fr.geromeavecung.resttddbddddd.drivers.rest;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.BusinessException;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.NotFoundException;
 import fr.geromeavecung.resttddbddddd.domain.boundedcontexts.shared.ValidationException;
+import fr.geromeavecung.resttddbddddd.domain.usecases.CreateABook;
 import fr.geromeavecung.resttddbddddd.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.resttddbddddd.domain.usecases.SearchABookByIdentifier;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchBooksByAuthor;
 import fr.geromeavecung.resttddbddddd.domain.usecases.SearchForAuthors;
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ContextConfiguration(classes = {GlobalExceptionHandler.class, AuthorsController.class})
+@ContextConfiguration(classes = {GlobalExceptionHandler.class, AuthorsController.class, BooksController.class})
 @WebMvcTest
 class GlobalExceptionHandlerTest {
 
@@ -37,6 +39,12 @@ class GlobalExceptionHandlerTest {
 
     @MockitoBean
     private SearchBooksByAuthor searchBooksByAuthor;
+
+    @MockitoBean
+    private CreateABook createABook;
+
+    @MockitoBean
+    private SearchABookByIdentifier searchABookByIdentifier;
 
     @Test
     void validation_exceptions_return_status_bad_request() throws Exception {
@@ -104,6 +112,30 @@ class GlobalExceptionHandlerTest {
 
     }
 
-    // TODO with another endpoint for instance field with url
+    @Test
+    void instance_depends_on_endpoint() throws Exception {
+        when(createABook.execute(any())).thenThrow(new BusinessException("book already exists"));
+
+        mockMvc.perform(post("/books")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                    "isbn": "978-0553293357",
+                                    "title": "Foundation",
+                                    "publicationDate": "1951",
+                                    "authorIdentifier": "c6625e54-d4e8-4ba0-942e-d285839527e1"
+                                }"""))
+                .andDo(print())
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().json("""
+                        {
+                           "type": "about:blank",
+                           "title": "Internal Server Error",
+                           "status": 500,
+                           "detail": "book already exists",
+                           "instance": "/books"
+                         }"""));
+
+    }
 
 }
