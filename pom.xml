@@ -4,10 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.geromeavecung</groupId>
-	<artifactId>rest-tdd-bdd-ddd</artifactId>
+	<artifactId>library</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-tdd-bdd-ddd</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for Spring Boot / REST / TDD / BDD / DDD</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.boot.version>3.5.3</spring.boot.version>
