@@ -28,7 +28,7 @@ Feature: Search for authors
         | JohnDo      |                                     |
         | john doe    | John Doe                            |
 # 'John Do '
-  # "title" for each exemple?
+  # "title" for each example?
       # order ?
 
   Rule: search term must be valid

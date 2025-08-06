@@ -10,7 +10,7 @@ public record ISBN(String value) {
 
     private static final Pattern ISBN_PATTERN = Pattern.compile("[0-9]{3}-[0-9]{10}");
 
-    public ISBN(String value) {
+    public ISBN {
         if (value == null) {
             throw new ValidationException("ISBN is mandatory");
         }
@@ -18,7 +18,6 @@ public record ISBN(String value) {
         if (!matcher.matches()) {
             throw new ValidationException("ISBN '%s' doesn't correspond to format 000-0000000000".formatted(value));
         }
-        this.value = value;
     }
 
     @Override
