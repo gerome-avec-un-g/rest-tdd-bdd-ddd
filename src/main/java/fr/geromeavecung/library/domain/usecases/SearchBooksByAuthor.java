@@ -1,6 +1,6 @@
 package fr.geromeavecung.library.domain.usecases;
 
-import fr.geromeavecung.library.domain.boundedcontexts.authors.AuthorSearchByIdentifier;
+import fr.geromeavecung.library.domain.boundedcontexts.authors.AuthorExists;
 import fr.geromeavecung.library.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.library.domain.boundedcontexts.books.BookSearchByAuthor;
 import org.springframework.stereotype.Service;
@@ -11,16 +11,16 @@ import java.util.UUID;
 @Service
 public class SearchBooksByAuthor {
 
-    private final AuthorSearchByIdentifier authorSearchByIdentifier;
+    private final AuthorExists authorExists;
     private final BookSearchByAuthor bookSearchByAuthor;
 
-    public SearchBooksByAuthor(AuthorSearchByIdentifier authorSearchByIdentifier, BookSearchByAuthor bookSearchByAuthor) {
-        this.authorSearchByIdentifier = authorSearchByIdentifier;
+    public SearchBooksByAuthor(AuthorExists authorExists, BookSearchByAuthor bookSearchByAuthor) {
+        this.authorExists = authorExists;
         this.bookSearchByAuthor = bookSearchByAuthor;
     }
 
     public List<Book> execute(UUID authorIdentifier) {
-        authorSearchByIdentifier.execute(authorIdentifier);
+        authorExists.execute(authorIdentifier);
         return bookSearchByAuthor.execute(authorIdentifier);
     }
 
