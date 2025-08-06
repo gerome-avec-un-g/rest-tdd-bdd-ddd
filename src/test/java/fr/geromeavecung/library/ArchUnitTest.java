@@ -44,7 +44,24 @@ class ArchUnitTest {
         rule.check(CLASSES);
     }
 
+    @Test
+    void bounded_context_authors_cant_depend_on_books() {
+        ArchRule rule = noClasses().that().resideInAPackage("..boundedcontexts.authors..")
+                .should().dependOnClassesThat().resideInAPackage("..boundedcontexts.books..");
+
+        rule.check(CLASSES);
+    }
+
+    @Test
+    void bounded_context_books_cant_depend_on_authors() {
+        ArchRule rule = noClasses().that().resideInAPackage("..boundedcontexts.books..")
+                .should().dependOnClassesThat().resideInAPackage("..boundedcontexts.authors..");
+
+        rule.check(CLASSES);
+    }
+
     // TODO use cases can't depend on DDD repository
+
     @Test
     void cucumber_steps_annotations_cant_be_and() {
         ArchRule rule = noClasses().should().dependOnClassesThat()
