@@ -52,10 +52,10 @@ public class CreateABookStepDefs {
         books.forEach(booksInMemory::save);
     }
 
-    @When("I create a book titled {string} published in {word} with ISBN {word} for author {word}")
+    @When("I create a book titled {string} published in {word} with ISBN {string} for author {word}")
     public void i_create_a_book_titled_for_author(String title, String publicationDate, String isbn, String authorIdentifier) {
         try {
-            book = createABook.execute(new CreateABookCommand(isbn, SharedStepDefs.sanitize(title), publicationDate, authorIdentifier));
+            book = createABook.execute(new CreateABookCommand(SharedStepDefs.sanitize(isbn), SharedStepDefs.sanitize(title), publicationDate, authorIdentifier));
         } catch (Exception exception) {
             LOGGER.error(exception.getMessage());
             sharedState.setException(exception);

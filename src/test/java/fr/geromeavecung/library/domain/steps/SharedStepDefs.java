@@ -29,7 +29,7 @@ public class SharedStepDefs {
         if ("[blank]".equals(cell)) {
             return " ";
         }
-        return cell;
+        return cell.replaceAll("'","");
     }
 
     @Then("an error is raised with message {string}")
