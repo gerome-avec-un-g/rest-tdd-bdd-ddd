@@ -3,6 +3,7 @@ package fr.geromeavecung.library.clients.persistence;
 import fr.geromeavecung.library.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.library.domain.boundedcontexts.authors.Authors;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public class AuthorsFromDatabase implements Authors {
 
         Optional<AuthorEntity> findByFirstNameAndLastName(String firstName, String lastName);
 
+        @Query("""
+                select new fr.geromeavecung.library.clients.persistence.AuthorEntityProjection(a.identifier, a.firstName, a.lastName)
+                from AuthorEntity a""")
+        List<AuthorEntityProjection> findAllAuthorEntityProjections();
+
     }
 
     private final AuthorsRepository repository;
@@ -30,12 +36,10 @@ public class AuthorsFromDatabase implements Authors {
         repository.save(new AuthorEntity(author));
     }
 
-    // TODO dto projection
-
     @Override
     public List<Author> findAll() {
-        return repository.findAll().stream()
-                .map(AuthorEntity::convert)
+        return repository.findAllAuthorEntityProjections().stream()
+                .map(AuthorEntityProjection::convert)
                 .toList();
     }
 

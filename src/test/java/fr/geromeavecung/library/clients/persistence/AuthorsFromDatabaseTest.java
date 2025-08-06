@@ -120,6 +120,8 @@ class AuthorsFromDatabaseTest {
             assertThat(existingAuthors).containsExactlyInAnyOrder(author1, author2);
         }
 
+        // TODO DTO projection performance test?
+
     }
 
 }
