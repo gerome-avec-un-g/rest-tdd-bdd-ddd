@@ -12,8 +12,6 @@ class ArchUnitTest {
 
     public static final JavaClasses CLASSES = new ClassFileImporter().importPackages("fr.geromeavecung.library");
 
-    // TODO replace by Spring Modulith
-
     @Test
     void domain_cant_depend_on_drivers() {
         ArchRule rule = noClasses().that().resideInAPackage("..domain..")
@@ -54,15 +52,5 @@ class ArchUnitTest {
 
         rule.check(CLASSES);
     }
-
-    // does not work, ArchUnit only checks bytecode...
-//    @Test
-//    void lombok_cant_be_used() {
-//        ArchRule rule = noClasses().should().dependOnClassesThat()
-//                .resideInAPackage("lombok..");
-//
-//        rule.check(CLASSES);
-//    }
-
 
 }
