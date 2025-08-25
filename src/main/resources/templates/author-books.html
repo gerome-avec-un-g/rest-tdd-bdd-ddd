@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html th:replace="~{layout.html :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Books by author</title>
+</head>
+
+<body>
+<section>
+    <h4>Books by author</h4>
+
+    <table th:if="${books != null}" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Publication date</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.publicationDate}"></td>
+            <td>
+                <a th:href="'/books/'+${book.getISBN()}" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">zoom_in</i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+</body>
+</html>

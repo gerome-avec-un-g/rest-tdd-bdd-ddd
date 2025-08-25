@@ -11,6 +11,9 @@
     <h4>Author</h4>
     <span th:text="${author.firstName}"/>
     <span th:text="${author.lastName}"/>
+    <a th:href="'/authors/'+${author.identifier}+'/books'" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">book_2</i>
+    </a>
 </section>
 </body>
 </html>
