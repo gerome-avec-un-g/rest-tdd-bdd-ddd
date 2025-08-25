@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html th:replace="~{layout.html :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Book</title>
+</head>
+
+<body>
+<section>
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 th:text="${book.title}" class="mdl-card__title-text">Title</h2>
+        </div>
+        <div th:text="${book.description}" class="mdl-card__supporting-text">
+            Book's description
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a th:href="'/authors/'+${book.authorIdentifier}" th:text="${book.author}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                John Doe
+            </a>
+        </div>
+        <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">add_shopping_cart</i>
+            </button>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

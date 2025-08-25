@@ -22,4 +22,19 @@ public class BookSummary extends RepresentationModel<BookSummary> {
     public String getPublicationDate() {
         return book.publicationDate().toString();
     }
+
+    public String getAuthorIdentifier() {
+        return book.authorIdentifier().toString();
+    }
+
+    public String getAuthor() {
+        return book.authorIdentifier().toString();
+    }
+
+    public String getDescription() {
+        return """
+                Description lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...""";
+    }
+
 }
