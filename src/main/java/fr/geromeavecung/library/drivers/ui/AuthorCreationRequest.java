@@ -2,7 +2,7 @@ package fr.geromeavecung.library.drivers.ui;
 
 import fr.geromeavecung.library.domain.usecases.CreateAnAuthorCommand;
 
-public final class AuthorCreationRequest {
+public class AuthorCreationRequest {
 
     private String firstName;
     private String lastName;

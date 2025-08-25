@@ -10,7 +10,30 @@
 <section>
     <h4>authors</h4>
 
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--8-col">
+            <form action="#" th:action="@{/authors}" th:object="${authorSearch}" method="post">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input th:field="*{searchTerm}" class="mdl-textfield__input" type="text" required>
+                    <label class="mdl-textfield__label" for="searchTerm">First name</label>
+                </div>
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <a id="author-creation" href="/author-creation"
+               class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <i class="material-icons">add</i>
+                <div class="mdl-tooltip" data-mdl-for="author-creation">
+                    Add a new author
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <table th:if="${authors != null}" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
         <tr>
             <th>First name</th>
@@ -31,14 +54,6 @@
         </tbody>
     </table>
 
-    <br/>
-
-    <a id="author-creation" href="/author-creation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-        <i class="material-icons">add</i>
-    </a>
-    <div class="mdl-tooltip" data-mdl-for="author-creation">
-        Add a new author
-    </div>
 </section>
 </body>
 </html>

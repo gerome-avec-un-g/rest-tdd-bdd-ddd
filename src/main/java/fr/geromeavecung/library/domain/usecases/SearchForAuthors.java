@@ -22,10 +22,6 @@ public class SearchForAuthors {
         return authorSearchByName.execute(searchCommand);
     }
 
-    public List<Author> findAll() {
-        return authorSearchByName.findAll();
-    }
-
     public Author findByIdentifier(UUID identifier) {
         return authorSearchByName.find(identifier)
                 .orElseThrow(() -> new BusinessException("identifier not found %s".formatted(identifier)));

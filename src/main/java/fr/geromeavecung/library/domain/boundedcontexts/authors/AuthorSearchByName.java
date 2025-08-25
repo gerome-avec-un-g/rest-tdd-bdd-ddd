@@ -21,10 +21,6 @@ public class AuthorSearchByName {
                 .toList();
     }
 
-    public List<Author> findAll() {
-        return authors.findAll();
-    }
-
     public Optional<Author> find(UUID identifier) {
         return authors.find(identifier);
     }
