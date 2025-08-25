@@ -13,19 +13,22 @@
     <table th:if="${books != null}" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
         <tr>
-            <th>Title</th>
+            <th class="mdl-data-table__cell--non-numeric">Title</th>
             <th>Publication date</th>
-            <th>Details</th>
+            <th class="mdl-data-table__cell--non-numeric">Details</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="book : ${books}">
-            <td th:text="${book.title}"></td>
+            <td th:text="${book.title}" class="mdl-data-table__cell--non-numeric"></td>
             <td th:text="${book.publicationDate}"></td>
-            <td>
-                <a th:href="'/books/'+${book.getISBN()}" class="mdl-button mdl-js-button mdl-button--icon">
+            <td class="mdl-data-table__cell--non-numeric">
+                <a th:id="details+${book.getISBN()}" th:href="'/books/'+${book.getISBN()}" class="mdl-button mdl-js-button mdl-button--icon">
                     <i class="material-icons">zoom_in</i>
                 </a>
+                <div class="mdl-tooltip" th:data-mdl-for="details+${book.getISBN()}">
+                    More information
+                </div>
             </td>
         </tr>
         </tbody>

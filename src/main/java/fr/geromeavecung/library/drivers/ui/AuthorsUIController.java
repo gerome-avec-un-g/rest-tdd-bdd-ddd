@@ -1,5 +1,6 @@
 package fr.geromeavecung.library.drivers.ui;
 
+import fr.geromeavecung.library.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.library.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.library.domain.usecases.SearchBooksByAuthor;
 import fr.geromeavecung.library.domain.usecases.SearchForAuthors;
@@ -52,8 +53,10 @@ public class AuthorsUIController {
 
     @GetMapping("/{authorIdentifier}/books")
     public String booksByAuthor(Model model, @PathVariable String authorIdentifier) {
-        List<BookSummary> bookSummaries = searchBooksByAuthor.execute(UUID.fromString(authorIdentifier)).stream()
-                .map(BookSummary::new)
+        UUID uuid = UUID.fromString(authorIdentifier);
+        Author author = searchForAuthors.findByIdentifier(uuid);
+        List<BookSummary> bookSummaries = searchBooksByAuthor.execute(uuid).stream()
+                .map(book -> new BookSummary(book, author))
                 .toList();
         model.addAttribute("books", bookSummaries);
         return "author-books";

@@ -1,14 +1,17 @@
 package fr.geromeavecung.library.drivers.ui;
 
+import fr.geromeavecung.library.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.library.domain.boundedcontexts.books.Book;
 import org.springframework.hateoas.RepresentationModel;
 
 public class BookSummary extends RepresentationModel<BookSummary> {
 
     private final Book book;
+    private final Author author;
 
-    public BookSummary(Book book) {
+    public BookSummary(Book book, Author author) {
         this.book = book;
+        this.author = author;
     }
 
     public String getISBN() {
@@ -24,11 +27,11 @@ public class BookSummary extends RepresentationModel<BookSummary> {
     }
 
     public String getAuthorIdentifier() {
-        return book.authorIdentifier().toString();
+        return author.identifier().toString();
     }
 
     public String getAuthor() {
-        return book.authorIdentifier().toString();
+        return "%s %s".formatted(author.firstName(), author.lastName());
     }
 
     public String getDescription() {

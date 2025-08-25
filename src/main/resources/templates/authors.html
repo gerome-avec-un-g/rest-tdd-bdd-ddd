@@ -17,38 +17,45 @@
                     <input th:field="*{searchTerm}" class="mdl-textfield__input" type="text" required>
                     <label class="mdl-textfield__label" for="searchTerm">First name</label>
                 </div>
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <button id="search" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                     <i class="material-icons">search</i>
                 </button>
+                <div class="mdl-tooltip" data-mdl-for="search">
+                    Search
+                </div>
             </form>
         </div>
         <div class="mdl-cell mdl-cell--4-col">
             <a id="author-creation" href="/author-creation"
                class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                 <i class="material-icons">add</i>
-                <div class="mdl-tooltip" data-mdl-for="author-creation">
-                    Add a new author
-                </div>
             </a>
+            <div class="mdl-tooltip" data-mdl-for="author-creation">
+                Add a new author
+            </div>
         </div>
     </div>
 
     <table th:if="${authors != null}" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
         <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Details</th>
+            <th class="mdl-data-table__cell--non-numeric">First name</th>
+            <th class="mdl-data-table__cell--non-numeric">Last name</th>
+            <th class="mdl-data-table__cell--non-numeric">Details</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="author : ${authors}">
-            <td th:text="${author.firstName}"></td>
-            <td th:text="${author.lastName}"></td>
-            <td>
-                <a th:href="'/authors/'+${author.identifier}" class="mdl-button mdl-js-button mdl-button--icon">
+            <td th:text="${author.firstName}" class="mdl-data-table__cell--non-numeric"></td>
+            <td th:text="${author.lastName}" class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a th:id="details+${author.identifier}" th:href="'/authors/'+${author.identifier}"
+                   class="mdl-button mdl-js-button mdl-button--icon">
                     <i class="material-icons">zoom_in</i>
                 </a>
+                <div class="mdl-tooltip" th:data-mdl-for="details+${author.identifier}">
+                    More information
+                </div>
             </td>
         </tr>
         </tbody>

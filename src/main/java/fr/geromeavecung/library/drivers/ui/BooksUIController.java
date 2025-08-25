@@ -1,5 +1,6 @@
 package fr.geromeavecung.library.drivers.ui;
 
+import fr.geromeavecung.library.domain.boundedcontexts.authors.Author;
 import fr.geromeavecung.library.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.library.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.library.domain.boundedcontexts.books.ISBN;
@@ -22,9 +23,11 @@ import java.util.UUID;
 public class BooksUIController {
 
     private final SearchABookByIdentifier searchABookByIdentifier;
+    private final SearchForAuthors searchForAuthors;
 
-    public BooksUIController(SearchABookByIdentifier searchABookByIdentifier) {
+    public BooksUIController(SearchABookByIdentifier searchABookByIdentifier, SearchForAuthors searchForAuthors) {
         this.searchABookByIdentifier = searchABookByIdentifier;
+        this.searchForAuthors = searchForAuthors;
     }
 
 
@@ -36,8 +39,10 @@ public class BooksUIController {
 
     @GetMapping("/{isbn}")
     public String findBook(Model model, @PathVariable String isbn) {
+        // TODO move to a back for front use case
         Book book = searchABookByIdentifier.execute(new ISBN(isbn));
-        model.addAttribute("book", new BookSummary(book));
+        Author author = searchForAuthors.findByIdentifier(book.authorIdentifier());
+        model.addAttribute("book", new BookSummary(book, author));
         return "book";
     }
 
