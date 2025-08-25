@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html th:replace="~{layout.html :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Author Creation</title>
+</head>
+
+<body>
+<section>
+    <h4>Author Creation</h4>
+
+    <form action="#" th:action="@{/author-creation}" th:object="${newAuthor}" method="post">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input th:field="*{firstName}" class="mdl-textfield__input" type="text" required>
+            <label class="mdl-textfield__label" for="firstName">First name</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input th:field="*{lastName}" class="mdl-textfield__input" type="text" required>
+            <label class="mdl-textfield__label" for="lastName">Last name</label>
+        </div>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+    </form>
+
+</section>
+</body>
+</html>

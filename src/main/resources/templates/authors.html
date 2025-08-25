@@ -22,17 +22,23 @@
         <tr th:each="author : ${authors}">
             <td th:text="${author.firstName}"></td>
             <td th:text="${author.lastName}"></td>
-            <td><a th:href="'/author/'+${author.identifier}" class="mdl-button mdl-js-button mdl-button--icon"><i
-                    class="material-icons">zoom_in</i></a></td>
+            <td>
+                <a th:href="'/author/'+${author.identifier}" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">zoom_in</i>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
 
     <br/>
 
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+    <a id="author-creation" href="/author-creation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
         <i class="material-icons">add</i>
-    </button>
+    </a>
+    <div class="mdl-tooltip" data-mdl-for="author-creation">
+        Add a new author
+    </div>
 </section>
 </body>
 </html>
