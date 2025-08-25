@@ -55,7 +55,7 @@ class AuthorsControllerTest {
         Author author = new Author(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), "Isaac", "Asimov");
         when(createAnAuthor.execute(new CreateAnAuthorCommand("Isaac", "Asimov"))).thenReturn(author);
 
-        mockMvc.perform(post("/authors")
+        mockMvc.perform(post("/api/authors")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -78,7 +78,7 @@ class AuthorsControllerTest {
         Author author = new Author(UUID.fromString("1160aed8-eb2f-4fb3-92e4-43480fff64f5"), "Isaac", "Asimov");
         when(searchForAuthors.execute(new SearchForAuthorsCommand("Asimov"))).thenReturn(List.of(author));
 
-        mockMvc.perform(get("/authors?searchTerm=Asimov"))
+        mockMvc.perform(get("/api/authors?searchTerm=Asimov"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -98,7 +98,7 @@ class AuthorsControllerTest {
     void find_books_by_author() throws Exception {
         when(searchBooksByAuthor.execute(UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"))).thenReturn(List.of(FOUNDATION, PRELUDE_TO_FOUNDATION));
 
-        mockMvc.perform(get("/authors/c6625e54-d4e8-4ba0-942e-d285839527e1/books"))
+        mockMvc.perform(get("/api/authors/c6625e54-d4e8-4ba0-942e-d285839527e1/books"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -111,7 +111,7 @@ class AuthorsControllerTest {
                               "links": [
                                 {
                                   "rel": "self",
-                                  "href": "http://localhost/books/978-0553293357"
+                                  "href": "http://localhost/api/books/978-0553293357"
                                 }
                               ]
                             },
@@ -122,7 +122,7 @@ class AuthorsControllerTest {
                               "links": [
                                 {
                                   "rel": "self",
-                                  "href": "http://localhost/books/978-0385233132"
+                                  "href": "http://localhost/api/books/978-0385233132"
                                 }
                               ]
                             }

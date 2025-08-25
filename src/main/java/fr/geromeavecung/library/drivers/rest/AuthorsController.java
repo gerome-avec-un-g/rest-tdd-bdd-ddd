@@ -22,7 +22,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping(value = "/authors")
+@RequestMapping(value = "/api/authors")
 public class AuthorsController {
 
     private final CreateAnAuthor createAnAuthor;

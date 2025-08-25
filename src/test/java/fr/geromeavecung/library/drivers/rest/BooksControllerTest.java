@@ -46,7 +46,7 @@ class BooksControllerTest {
     void create_a_book() throws Exception {
         when(createABook.execute(new CreateABookCommand("978-0553293357", "Foundation", "1951", "c6625e54-d4e8-4ba0-942e-d285839527e1"))).thenReturn(FOUNDATION);
 
-        mockMvc.perform(post("/books")
+        mockMvc.perform(post("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -71,7 +71,7 @@ class BooksControllerTest {
     void search_a_book_by_identifier() throws Exception {
         when(searchABookByIdentifier.execute(new ISBN("978-0553293357"))).thenReturn(FOUNDATION);
 
-        mockMvc.perform(get("/books/978-0553293357"))
+        mockMvc.perform(get("/api/books/978-0553293357"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json("""

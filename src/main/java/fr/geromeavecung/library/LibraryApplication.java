@@ -12,7 +12,8 @@ public class LibraryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryApplication.class, args);
-		LOGGER.info("http://localhost:8080/authors");
+		LOGGER.info("http://localhost:8080/");
+		LOGGER.info("http://localhost:8080/api/authors");
 	}
 
 }

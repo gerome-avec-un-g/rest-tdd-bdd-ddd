@@ -50,7 +50,7 @@ class GlobalExceptionHandlerTest {
     void validation_exceptions_return_status_bad_request() throws Exception {
         when(createAnAuthor.execute(any())).thenThrow(new ValidationException("first name 'null' is mandatory"));
 
-        mockMvc.perform(post("/authors")
+        mockMvc.perform(post("/api/authors")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -65,7 +65,7 @@ class GlobalExceptionHandlerTest {
                            "title": "Bad Request",
                            "status": 400,
                            "detail": "first name 'null' is mandatory",
-                           "instance": "/authors"
+                           "instance": "/api/authors"
                          }"""));
 
     }
@@ -74,7 +74,7 @@ class GlobalExceptionHandlerTest {
     void not_found_exceptions_return_status_not_found() throws Exception {
         when(searchForAuthors.execute(any())).thenThrow(new NotFoundException("Authors named 'Asimov' not found"));
 
-        mockMvc.perform(get("/authors?searchTerm=Asimov"))
+        mockMvc.perform(get("/api/authors?searchTerm=Asimov"))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().json("""
@@ -83,7 +83,7 @@ class GlobalExceptionHandlerTest {
                            "title": "Not Found",
                            "status": 404,
                            "detail": "Authors named 'Asimov' not found",
-                           "instance": "/authors"
+                           "instance": "/api/authors"
                          }"""));
 
     }
@@ -92,7 +92,7 @@ class GlobalExceptionHandlerTest {
     void other_exceptions_return_status_internal_server_error() throws Exception {
         when(createAnAuthor.execute(any())).thenThrow(new BusinessException("author already exists"));
 
-        mockMvc.perform(post("/authors")
+        mockMvc.perform(post("/api/authors")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -107,7 +107,7 @@ class GlobalExceptionHandlerTest {
                            "title": "Internal Server Error",
                            "status": 500,
                            "detail": "author already exists",
-                           "instance": "/authors"
+                           "instance": "/api/authors"
                          }"""));
 
     }
@@ -116,7 +116,7 @@ class GlobalExceptionHandlerTest {
     void instance_depends_on_endpoint() throws Exception {
         when(createABook.execute(any())).thenThrow(new BusinessException("book already exists"));
 
-        mockMvc.perform(post("/books")
+        mockMvc.perform(post("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -133,7 +133,7 @@ class GlobalExceptionHandlerTest {
                            "title": "Internal Server Error",
                            "status": 500,
                            "detail": "book already exists",
-                           "instance": "/books"
+                           "instance": "/api/books"
                          }"""));
 
     }
