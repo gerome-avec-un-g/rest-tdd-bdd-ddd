@@ -1,15 +1,14 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<!DOCTYPE html>
+
+<html th:replace="~{layout.html :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Library</title>
-    <!--    <link rel="stylesheet" th:href="@{/webjars/todomvc-common/base.css}">-->
-    <!--    <link rel="stylesheet" th:href="@{/webjars/todomvc-app-css/index.css}">-->
+    <title>Home</title>
 </head>
+
 <body>
-<span th:text="#{welcome.message}"/>
-<a href="/authors">Authors!</a>
+<section>
+    <span th:text="#{welcome.message}"/>
+</section>
 </body>
+</html>
