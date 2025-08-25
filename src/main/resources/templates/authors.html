@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Authors</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+<h1>authors</h1>
+
+<table>
+    <tr>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>DETAILS</th>
+    </tr>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.firstName}"></td>
+        <td th:text="${author.lastName}"></td>
+        <td><a th:href="'/author/'+${author.identifier}"><img src="/images/zoom.png" alt="details"></a></td>
+    </tr>
+</table>
+
+</body>
+</html>

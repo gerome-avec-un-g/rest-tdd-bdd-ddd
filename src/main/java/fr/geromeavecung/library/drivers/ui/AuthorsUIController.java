@@ -1,35 +1,31 @@
 package fr.geromeavecung.library.drivers.ui;
 
-import fr.geromeavecung.library.drivers.rest.AuthorCreationRequest;
-import fr.geromeavecung.library.drivers.rest.AuthorCreationResponse;
-import fr.geromeavecung.library.drivers.rest.AuthorsSearchResponse;
-import fr.geromeavecung.library.drivers.rest.FindBooksByAuthorResponse;
-import org.springframework.http.ResponseEntity;
+import fr.geromeavecung.library.domain.usecases.SearchForAuthors;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping(value = "/authors")
 public class AuthorsUIController {
 
+    private final SearchForAuthors searchForAuthors;
+
+    public AuthorsUIController(SearchForAuthors searchForAuthors) {
+        this.searchForAuthors = searchForAuthors;
+    }
+
     @GetMapping
-    public ResponseEntity<AuthorsSearchResponse> searchForAuthors(@RequestParam String searchTerm) {
-        return null;
-    }
-
-    @GetMapping("/{authorIdentifier}/books")
-    public ResponseEntity<FindBooksByAuthorResponse> findBooksByAuthor(@PathVariable String authorIdentifier) {
-        return null;
-    }
-
-    @PostMapping
-    public ResponseEntity<AuthorCreationResponse> createAnAuthor(@RequestBody AuthorCreationRequest authorCreationRequest) {
-        return null;
+    public String allAuthors(Model model) {
+        List<AuthorSummary> authorSummaries = searchForAuthors.findAll().stream()
+                .map(AuthorSummary::new)
+                .toList();
+        //authorSummaries.forEach(authorSummaries -> authorSummaries.add(linkTo(methodOn(AuthorUIController.class).author(authorSummaries.getIdentifier())).withSelfRel()));
+        model.addAttribute("authors", authorSummaries);
+        return "authors";
     }
 
 }
