@@ -10,7 +10,7 @@ public class FixedDateGenerator implements DateGenerator {
 
     @Override
     public LocalDate now() {
-        return LocalDate.now();// TODO
+        return LocalDate.now();
     }
 
 }
