@@ -1,12 +1,13 @@
 package fr.geromeavecung.library.drivers.rest;
 
 import fr.geromeavecung.library.domain.boundedcontexts.authors.Author;
+import fr.geromeavecung.library.domain.boundedcontexts.authors.SearchForAuthorsCommand;
 import fr.geromeavecung.library.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.library.domain.boundedcontexts.books.BookTitle;
 import fr.geromeavecung.library.domain.boundedcontexts.books.ISBN;
-import fr.geromeavecung.library.domain.usecases.CreateAnAuthorCommand;
-import fr.geromeavecung.library.domain.boundedcontexts.authors.SearchForAuthorsCommand;
+import fr.geromeavecung.library.domain.boundedcontexts.books.PublicationDate;
 import fr.geromeavecung.library.domain.usecases.CreateAnAuthor;
+import fr.geromeavecung.library.domain.usecases.CreateAnAuthorCommand;
 import fr.geromeavecung.library.domain.usecases.SearchBooksByAuthor;
 import fr.geromeavecung.library.domain.usecases.SearchForAuthors;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -19,7 +20,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.Year;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,8 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class AuthorsControllerTest {
 
-    private static final Book FOUNDATION = new Book(new ISBN("978-0553293357"), new BookTitle("Foundation"), Year.of(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
-    private static final Book PRELUDE_TO_FOUNDATION = new Book(new ISBN("978-0385233132"), new BookTitle("Prelude to Foundation"), Year.of(1988), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+    private static final Book FOUNDATION = new Book(new ISBN("978-0553293357"), new BookTitle("Foundation"), PublicationDate.read(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+    private static final Book PRELUDE_TO_FOUNDATION = new Book(new ISBN("978-0385233132"), new BookTitle("Prelude to Foundation"), PublicationDate.read(1988), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
 
     @Autowired
     private MockMvc mockMvc;

@@ -3,6 +3,7 @@ package fr.geromeavecung.library.drivers.rest;
 import fr.geromeavecung.library.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.library.domain.boundedcontexts.books.BookTitle;
 import fr.geromeavecung.library.domain.boundedcontexts.books.ISBN;
+import fr.geromeavecung.library.domain.boundedcontexts.books.PublicationDate;
 import fr.geromeavecung.library.domain.usecases.CreateABook;
 import fr.geromeavecung.library.domain.usecases.CreateABookCommand;
 import fr.geromeavecung.library.domain.usecases.SearchABookByIdentifier;
@@ -16,7 +17,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.Year;
 import java.util.UUID;
 
 import static org.mockito.Mockito.when;
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class BooksControllerTest {
 
-    private static final Book FOUNDATION = new Book(new ISBN("978-0553293357"), new BookTitle("Foundation"), Year.of(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
+    private static final Book FOUNDATION = new Book(new ISBN("978-0553293357"), new BookTitle("Foundation"), PublicationDate.read(1951), UUID.fromString("c6625e54-d4e8-4ba0-942e-d285839527e1"));
 
     @Autowired
     private MockMvc mockMvc;

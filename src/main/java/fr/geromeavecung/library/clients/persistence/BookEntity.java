@@ -3,12 +3,12 @@ package fr.geromeavecung.library.clients.persistence;
 import fr.geromeavecung.library.domain.boundedcontexts.books.Book;
 import fr.geromeavecung.library.domain.boundedcontexts.books.BookTitle;
 import fr.geromeavecung.library.domain.boundedcontexts.books.ISBN;
+import fr.geromeavecung.library.domain.boundedcontexts.books.PublicationDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.time.Year;
 import java.util.UUID;
 
 @Entity
@@ -22,7 +22,7 @@ public class BookEntity {
     public BookEntity(Book book) {
         this.isbn = book.isbn().value();
         this.title = book.title().value();
-        this.publicationDate = book.publicationDate().getValue();
+        this.publicationDate = book.publicationDate().year().getValue();
         this.authorIdentifier = book.authorIdentifier();
     }
 
@@ -40,7 +40,7 @@ public class BookEntity {
     private UUID authorIdentifier;
 
     public Book convert() {
-        return new Book(new ISBN(isbn), new BookTitle(title), Year.of(publicationDate), authorIdentifier);
+        return new Book(new ISBN(isbn), new BookTitle(title), PublicationDate.read(publicationDate), authorIdentifier);
     }
 
 }

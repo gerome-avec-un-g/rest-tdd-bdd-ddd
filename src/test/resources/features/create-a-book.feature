@@ -8,7 +8,7 @@ Feature: Create a book
 
   Rule: data must be valid
     Scenario Outline: Title is mandatory and can't be longer than 30 characters
-      When I create a book titled "<title>" published in 1951 with ISBN "978-0553293357" for author 9d628ae3-4147-4f6e-91d4-3851be1af7c6
+      When I create a book titled "<title>" published in 1951 with ISBN "978-0553293357" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then an error is raised with message "<error message>"
       Examples:
         | title                           | error message                                                      |
@@ -17,15 +17,25 @@ Feature: Create a book
         | [blank]                         | title ' ' is mandatory                                             |
         | abcdeabcdeabcdeabcdeabcdeabcdea | title 'abcdeabcdeabcdeabcdeabcdeabcdea' is more than 30 characters |
         #| $    | special characters    |
-    # TODO Scenario Outline: publication date
+    Scenario Outline: publication date is mandatory and can't be in the future
+      #Given the year in 2025
+      When I create a book titled "Foundation" published in <publication date> with ISBN "978-0553293357" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
+      Then an error is raised with message "<error message>"
+      Examples:
+        | publication date | error message                                          |
+        | [null]           | publication date is mandatory                          |
+        | [empty]          | publication date format is invalid ''                  |
+        | [blank]          | publication date format is invalid ' '                 |
+        | abcd             | publication date format is invalid 'abcd'              |
+        | 2026             | publication date 2026 can't be after current year 2025 |
     Scenario Outline: ISBN is mandatory and has format 000-0000000000
-      When I create a book titled "Foundation" published in 1951 with ISBN "<ISBN>" for author 9d628ae3-4147-4f6e-91d4-3851be1af7c6
+      When I create a book titled "Foundation" published in 1951 with ISBN "<ISBN>" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then an error is raised with message "<error message>"
       Examples:
         | ISBN             | error message                                                      |
         | [null]           | ISBN is mandatory                                                  |
-        | [empty]          | ISBN '' doesn't correspond to format 000-0000000000                                           |
-        | [blank]          | ISBN ' ' doesn't correspond to format 000-0000000000                                              |
+        | [empty]          | ISBN '' doesn't correspond to format 000-0000000000                |
+        | [blank]          | ISBN ' ' doesn't correspond to format 000-0000000000               |
         | 0000000000000    | ISBN '0000000000000' doesn't correspond to format 000-0000000000   |
         | 000-00000000000  | ISBN '000-00000000000' doesn't correspond to format 000-0000000000 |
         | 000-000000000    | ISBN '000-000000000' doesn't correspond to format 000-0000000000   |
@@ -42,7 +52,7 @@ Feature: Create a book
         | [empty]           | Invalid UUID string: [empty]  |
         | [blank]           | Invalid UUID string: [blank]  |
         | 9d628ae3          | Invalid UUID string: 9d628ae3 |
-      # TODO ? better error message but it would mean to defer UUID conversion into Book class
+        # we keep UUID object error messages, there is no point in wrapping UUID for our own error messages
   # TODO trailing spaces
 
   Rule: the book's author must exists

@@ -17,4 +17,5 @@ class RandomIdentifierGeneratorTest {
 
         assertThat(identifier1).isNotEqualTo(identifier2);
     }
+
 }
