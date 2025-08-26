@@ -14,7 +14,7 @@
         <div class="mdl-cell mdl-cell--8-col">
             <form action="#" th:action="@{/authors}" th:object="${authorSearch}" method="post">
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input th:field="*{searchTerm}" pattern=".{3,20}" class="mdl-textfield__input" type="text" required>
+                    <input th:field="*{searchTerm}" pattern=".{3,20}" title="3 to 20 characters" class="mdl-textfield__input" type="text" required>
                     <label class="mdl-textfield__label" for="searchTerm">First name</label>
                 </div>
                 <button id="search" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
