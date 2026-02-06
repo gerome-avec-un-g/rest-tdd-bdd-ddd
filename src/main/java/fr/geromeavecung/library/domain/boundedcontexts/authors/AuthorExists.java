@@ -16,6 +16,6 @@ public class AuthorExists {
 
     public void execute(UUID identifier) {
         authors.find(identifier)
-                .orElseThrow(() -> new BusinessException("author identifier '%s' doesn't exists".formatted(identifier)));
+                .orElseThrow(() -> new BusinessException("author identifier '%s' doesn't exist".formatted(identifier)));
     }
 }

@@ -5,6 +5,10 @@ not the [Bee Gees song](https://www.youtube.com/watch?v=I_izvAbhExY).
 
 ## Rule: If you don't eat you die
 
+* Given there are <start> cucumbers
+
+## Rule: If you don't eat you die
+
 ![xkcd](https://imgs.xkcd.com/comics/lunch_2x.png)
 
 ```mermaid 
@@ -18,6 +22,7 @@ stateDiagram-v2
 ```
 
 `@important` `@essential`
+
 ### Scenario Outline: eating
 
 * Given there are <start> cucumbers
@@ -27,6 +32,6 @@ stateDiagram-v2
 #### Examples:
 
 | start | eat | left |
-  | ----- | --- | ---- |
-|    12 |   5 |    7 |
-|    20 |   5 |   15 |
+  |-------|-----|------|
+| 12    | 5   | 7    |
+| 20    | 5   | 15   |
