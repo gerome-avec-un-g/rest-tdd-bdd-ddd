@@ -1,4 +1,4 @@
-# Feature: Create a book
+# Feature: Create a book (described with Markdown)
 
 ## Background:
 
