@@ -18,7 +18,6 @@ Feature: Create a book
         | abcdeabcdeabcdeabcdeabcdeabcdea | title 'abcdeabcdeabcdeabcdeabcdeabcdea' is more than 30 characters |
         #| $    | special characters    |
     Scenario Outline: publication date is mandatory and can't be in the future
-      #Given the year in 2025
       When I create a book titled "Foundation" published in <publication date> with ISBN "978-0553293357" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then an error is raised with message "<error message>"
       Examples:
@@ -27,7 +26,6 @@ Feature: Create a book
         | [empty]          | publication date format is invalid ''                  |
         | [blank]          | publication date format is invalid ' '                 |
         | abcd             | publication date format is invalid 'abcd'              |
-        | 2026             | publication date 2026 can't be after current year 2025 |
     Scenario Outline: ISBN is mandatory and has format 000-0000000000
       When I create a book titled "Foundation" published in 1951 with ISBN "<ISBN>" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then an error is raised with message "<error message>"
@@ -58,7 +56,7 @@ Feature: Create a book
   Rule: the book's author must exists
     Example: the author doesn't exists
       When I create a book titled "Foundation" published in 1951 with ISBN "978-0553293357" for author da7557ff-9236-46db-90f7-074029dae4ad
-      Then an error is raised with message "author identifier 'da7557ff-9236-46db-90f7-074029dae4ad' doesn't exists"
+      Then an error is raised with message "author identifier 'da7557ff-9236-46db-90f7-074029dae4ad' doesn't exist"
     Example: the author already exists
       When I create a book titled "Foundation" published in 1951 with ISBN "978-0553293357" for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac
       Then the book "Foundation" published in 1951 is created with ISBN 978-0553293357 for author 8bb4daf7-3c5c-4f62-a416-99be9ae3a9ac

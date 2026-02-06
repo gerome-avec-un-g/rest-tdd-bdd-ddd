@@ -20,7 +20,7 @@ Feature: Search books by author
         | 978-0141439518 | Pride and Prejudice | 1813             | 589a0b4c-93b8-4f46-8c7e-02794a8c252e |
     Example: the author doesn't exists
       When I search for the books of 3afb5374-7d1f-4a92-9a96-de01a8820a43
-      Then an error is raised with message "author identifier '3afb5374-7d1f-4a92-9a96-de01a8820a43' doesn't exists"
+      Then an error is raised with message "author identifier '3afb5374-7d1f-4a92-9a96-de01a8820a43' doesn't exist"
 
   Rule: the search returns all the books of the author
     Example: 0 books
